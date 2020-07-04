@@ -24,6 +24,13 @@
 <!-- endinject -->
 <!-- Custom js for this page-->
 <script src="assets/js/demo_1/dashboard.js"></script>
+<!-- datatables:js -->
+<script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <!-- End custom js for this page-->
+<script>
+$(document).ready( function () {
+    $('.layanan').DataTable();
+} );
+</script>
 </body>
 </html>
