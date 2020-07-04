@@ -14,7 +14,7 @@
     </li>
     <li class="nav-item nav-category">Main Menu</li>
     <li class="nav-item">
-      <a class="nav-link" href="">
+      <a class="nav-link" href="dashboard.php">
         <i class="menu-icon typcn typcn-document-text"></i>
         <span class="menu-title">Dashboard</span>
       </a>
@@ -35,6 +35,18 @@
       <a class="nav-link" href="harga.php">
         <i class="menu-icon typcn typcn-shopping-bag"></i>
         <span class="menu-title">Olah Data Harga</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="pesanan.php">
+        <i class="menu-icon typcn typcn-shopping-bag"></i>
+        <span class="menu-title">Olah Data Pesanan</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="pelanggan.php">
+        <i class="menu-icon typcn typcn-shopping-bag"></i>
+        <span class="menu-title">Olah Data Pelanggan</span>
       </a>
     </li>
     </ul>
