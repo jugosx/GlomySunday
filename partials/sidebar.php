@@ -26,9 +26,9 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="kategori.php">
+      <a class="nav-link" href="layanan.php">
         <i class="menu-icon typcn typcn-shopping-bag"></i>
-        <span class="menu-title">Olah Data Kategori</span>
+        <span class="menu-title">Olah Data Layanan</span>
       </a>
     </li>
     <li class="nav-item">
