@@ -15,6 +15,9 @@
 <!-- plugins:js -->
 <script src="assets/vendors/js/vendor.bundle.base.js"></script>
 <script src="assets/vendors/js/vendor.bundle.addons.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 <!-- endinject -->
 <!-- Plugin js for this page-->
 <!-- End plugin js for this page-->

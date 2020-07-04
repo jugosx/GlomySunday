@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Petshop Mechin 4 | Kelola Harga</title>
+    <title>Petshop Mechin 4 | Kelola Pesanan</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendors/iconfonts/ionicons/css/ionicons.css">
@@ -12,9 +12,14 @@
     <link rel="stylesheet" href="assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.addons.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- endinject -->
     <!-- plugin css for this page -->
     <!-- End plugin css for this page -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <!-- inject:css -->
     <link rel="stylesheet" href="assets/css/shared/style.css">
     <!-- endinject -->
@@ -41,7 +46,7 @@
                   <h4 class="page-title">Dashboard</h4>
                   <div class="quick-link-wrapper w-100 d-md-flex flex-md-wrap">
                     <ul class="quick-links">
-                      <li><a href="#">Olah Data Harga</a></li>
+                      <li><a href="#">Olah Data Pesanan</a></li>
                     </ul>
                   </div>
                 </div>
@@ -53,12 +58,22 @@
             <div class="col-12 stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Form Kategori</h4>
+                        <h4 class="card-title">Form Pemesanan</h4>
                         <form class="forms-sample">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Id Harga Layanan</label>
+                            <label class="col-sm-3 col-form-label">Id Pemesanan</label>
                             <div class="col-sm-6">
-                              <input type="number" class="form-control" placeholder="Enter ID Harga Layanan">
+                              <input type="number" class="form-control" placeholder="Enter ID Pesanan">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Tanggal</label>
+                            <div class="col-sm-6 gj-datepicker gj-datepicker-bootstrap gj-unselectable input-group">
+                              <input class="form-control" id="datepicker" width="276" placeholder="dd/mm/yyyy" /> <script>
+                                    $('#datepicker').datepicker({
+                                        uiLibrary: 'bootstrap4'
+                                    });
+                                </script>
                             </div>
                           </div>
                           <div class="form-group row">
@@ -73,38 +88,33 @@
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Kondisi Hewan</label>
+                            <label class="col-sm-3 col-form-label">Nama Pelanggan</label>
                             <div class="col-sm-6">
                               <select class="form-control">
-                                <option>Sehat Selalu</option>
-                                <option>Covid-19</option>
-                                <option>Masuk Angin</option>
-                                <option>Tuna Rungu</option>
+                                <option>Alexander</option>
+                                <option>Tjong</option>
+                                <option>MeiMei</option>
                               </select>
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Jenis Hewan</label>
+                            <label class="col-sm-3 col-form-label">Hewan</label>
                             <div class="col-sm-6">
-                              <select class="form-control">
-                                <option>Unggas</option>
-                                <option>Mamalia</option>
-                                <option>NU</option>
-                                <option>Muhammadiyah</option>
-                              </select>
+                              <input type="text" class="form-control" placeholder="Hewan">
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Harga</label>
-                            <div class="col-sm-6">
-                              <select class="form-control">
-                                <option>10.000</option>
-                                <option>20.000</option>
-                                <option>50.000</option>
-                                <option>100.000</option>
-                              </select>
+                              <label class="col-sm-3 col-form-label">Harga</label>
+                          <div class="input-group col-sm-6">
+                            <div class="input-group-prepend bg-primary border-primary">
+                              <span class="input-group-text bg-transparent text-white">Rp.</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <div class="input-group-append bg-primary border-primary">
+                              <span class="input-group-text bg-transparent text-white">.00</span>
                             </div>
                           </div>
+                        </div>
                           <button type="submit" class="btn btn-success mr-2">Simpan</button>
                           <button class="btn btn-light">Batal</button>
                         </form>
@@ -115,41 +125,46 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Olah Data Harga</h4>
-                    <p class="card-description"> Olah Data <code>.Harga</code> </p>
+                    <h4 class="card-title">Olah Data Pesanan</h4>
+                    <p class="card-description"> Olah Data <code>.Pesanan</code> </p>
                     <table class="table table-bordered">
                       <thead>
                         <tr>
                           <th> No </th>
-                          <th> ID </th>
-                          <th> Kategori </th>
-                          <th> Kondisi </th>
-                          <th> Jenis Hewan </th>
-                          <th> Harga (Rp.)</th>
+                          <th> Tanggal </th>
+                          <th> Layanan </th>
+                          <th> Pelanggan </th>
+                          <th> Hewan </th>
+                          <th> Harga </th>
+                          <th> Status </th>
                           <th> Aksi </th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <td> 1 </td>
-                          <td> 12111 </td>
-                          <td> Adus </td>
-                          <td> Meriang </td>
+                          <td> 11-09-1989</td>
+                          <td> Mandi Besar </td>
+                          <td> Alexander </td>
                           <td> Asu Teles </td>
-                          <td> 10.000 </td>
+                          <td> Rp. 10.000 </td>
+                          <td> Belum Lunas </td>
                           <td> 
+                            <button type="button" data-toggle="modal" data-target="#pemesananModal" class="btn btn-outline-primary">Info</button>
                             <button type="button" class="btn btn-outline-warning">Edit</button>
                             <button type="button" class="btn btn-outline-danger">Hapus</button>
                           </td>
                         </tr>
                         <tr>
                           <td> 2 </td>
-                          <td> 12112 </td>
-                          <td> Kerok </td>
-                          <td> Meriang </td>
-                          <td> Kucing Teles </td>
-                          <td> 10.000 </td>
+                          <td> 11-09-1989</td>
+                          <td> Keramas </td>
+                          <td> Budi </td>
+                          <td> Asu Teles </td>
+                          <td> Rp. 10.000 </td>
+                          <td> Lunas </td>
                           <td> 
+                            <button type="button" data-toggle="modal" data-target="#pemesananModal" class="btn btn-outline-primary" class="btn btn-outline-primary">Info</button>
                             <button type="button" class="btn btn-outline-warning">Edit</button>
                             <button type="button" class="btn btn-outline-danger">Hapus</button>
                           </td>
@@ -163,4 +178,22 @@
           </div>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
+          <div class="modal fade" id="pemesananModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Keterangan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Kie diisi apa cuy
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+          </div>
           <?php include_once 'partials/footer.php'?>

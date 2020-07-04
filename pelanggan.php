@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Petshop Mechin 4 | Kelola Harga</title>
+    <title>Petshop Mechin 4 | Kelola Pelanggan</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendors/iconfonts/ionicons/css/ionicons.css">
@@ -41,7 +41,7 @@
                   <h4 class="page-title">Dashboard</h4>
                   <div class="quick-link-wrapper w-100 d-md-flex flex-md-wrap">
                     <ul class="quick-links">
-                      <li><a href="#">Olah Data Harga</a></li>
+                      <li><a href="#">Olah Data Pelanggan</a></li>
                     </ul>
                   </div>
                 </div>
@@ -53,56 +53,36 @@
             <div class="col-12 stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Form Kategori</h4>
+                        <h4 class="card-title">Form Pelanggan</h4>
                         <form class="forms-sample">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Id Harga Layanan</label>
+                            <label class="col-sm-3 col-form-label">Id Pelanggan</label>
                             <div class="col-sm-6">
-                              <input type="number" class="form-control" placeholder="Enter ID Harga Layanan">
+                              <input type="number" class="form-control" placeholder="Enter ID Pelanggan">
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Kategori Layanan</label>
+                            <label class="col-sm-3 col-form-label">Nama</label>
                             <div class="col-sm-6">
-                              <select class="form-control">
-                                <option>Mandi Besar</option>
-                                <option>Mandi Basah</option>
-                                <option>Kerokan</option>
-                                <option>Pijat +-</option>
-                              </select>
+                              <input type="text" class="form-control" placeholder="Nama Pelanggan">
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Kondisi Hewan</label>
+                            <label class="col-sm-3 col-form-label">Alamat</label>
                             <div class="col-sm-6">
-                              <select class="form-control">
-                                <option>Sehat Selalu</option>
-                                <option>Covid-19</option>
-                                <option>Masuk Angin</option>
-                                <option>Tuna Rungu</option>
-                              </select>
+                              <input type="text" class="form-control" placeholder="Alamat">
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Jenis Hewan</label>
+                            <label class="col-sm-3 col-form-label">No Telp</label>
                             <div class="col-sm-6">
-                              <select class="form-control">
-                                <option>Unggas</option>
-                                <option>Mamalia</option>
-                                <option>NU</option>
-                                <option>Muhammadiyah</option>
-                              </select>
+                              <input type="number" class="form-control" placeholder="No Telp">
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Harga</label>
+                            <label class="col-sm-3 col-form-label">Email</label>
                             <div class="col-sm-6">
-                              <select class="form-control">
-                                <option>10.000</option>
-                                <option>20.000</option>
-                                <option>50.000</option>
-                                <option>100.000</option>
-                              </select>
+                              <input type="email" class="form-control" placeholder="Email">
                             </div>
                           </div>
                           <button type="submit" class="btn btn-success mr-2">Simpan</button>
@@ -115,41 +95,40 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Olah Data Harga</h4>
-                    <p class="card-description"> Olah Data <code>.Harga</code> </p>
+                    <h4 class="card-title">Olah Data Pelanggan</h4>
+                    <p class="card-description"> Olah Data <code>.Pelanggan</code> </p>
                     <table class="table table-bordered">
                       <thead>
                         <tr>
                           <th> No </th>
-                          <th> ID </th>
-                          <th> Kategori </th>
-                          <th> Kondisi </th>
-                          <th> Jenis Hewan </th>
-                          <th> Harga (Rp.)</th>
+                          <th> Nama Pelanggan </th>
+                          <th> Alamat </th>
+                          <th> No. Telp </th>
+                          <th> Email </th>
                           <th> Aksi </th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <td> 1 </td>
-                          <td> 12111 </td>
-                          <td> Adus </td>
-                          <td> Meriang </td>
-                          <td> Asu Teles </td>
-                          <td> 10.000 </td>
+                          <td> Budi Swastika</td>
+                          <td> Jalan Pegangsaan </td>
+                          <td> 08123321122 </td>
+                          <td> rudi@xnxx.com </td>
                           <td> 
+                            <button type="button" class="btn btn-outline-primary">Info</button>
                             <button type="button" class="btn btn-outline-warning">Edit</button>
                             <button type="button" class="btn btn-outline-danger">Hapus</button>
                           </td>
                         </tr>
                         <tr>
                           <td> 2 </td>
-                          <td> 12112 </td>
-                          <td> Kerok </td>
-                          <td> Meriang </td>
-                          <td> Kucing Teles </td>
-                          <td> 10.000 </td>
+                          <td> Salis Swastika</td>
+                          <td> Jalan Surakarta </td>
+                          <td> 08123321122 </td>
+                          <td> rudi@xnxx.com </td>
                           <td> 
+                            <button type="button" class="btn btn-outline-primary">Info</button>
                             <button type="button" class="btn btn-outline-warning">Edit</button>
                             <button type="button" class="btn btn-outline-danger">Hapus</button>
                           </td>
