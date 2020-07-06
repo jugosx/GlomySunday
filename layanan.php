@@ -1,10 +1,11 @@
+<?php include_once 'config/connection.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Petshop Mechin 4 | Kelola Kategori</title>
+    <title>Petshop Mechin 4 | Kelola Layanan</title>
     <!-- plugins:css -->
     <?php require 'partials/style.css.php' ?>
     <!-- endinject -->
@@ -23,13 +24,18 @@
             <!-- Page Title Header Starts-->
             <?php include_once 'partials/title-header.php' ?>
             <!-- Page Title Header Ends-->
+            <div class="alert alert-warning" style="display:none" id="warning">
+              <span>
+                <p>Jika ingin membatalkan perubahan pastikan tekan batal terlebih dahulu, agar data tidak tertimpa!</p>
+              </span>
+            </div>
             
             <div class="row">
             <div class="col-12 stretch-card">
                     <div class="card">
                       <div class="card-body">
                         <h4 class="card-title">Form Layanan</h4>
-                        <form class="forms-sample">
+                        <form class="forms-sample" id="form" method="post" action="slave/layanan_crud.php?proses=insert" enctype="multipart/form-data">
                           <div class="form-group row">
                             <input type="hidden" name="id_layanan">
                             <label class="col-sm-3 col-form-label">Nama Layanan</label>
@@ -59,7 +65,7 @@
                             </div>
                           </div>
                           <button type="submit" class="btn btn-success mr-2">Simpan</button>
-                          <button class="btn btn-light">Batal</button>
+                          <a href="" class="btn btn-light">Batal</a>
                         </form>
                       </div>
                     </div>
@@ -68,8 +74,8 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Olah Data Kategori</h4>
-                    <p class="card-description"> Olah Data <code>.Layanan</code> </p>
+                    <h4 class="card-title">Olah Data Layanan</h4>
+                    <!-- <p class="card-description"> Olah Data <code>.Layanan</code> </p> -->
                     <table class="table table-bordered layanan">
                       <thead>
                         <tr>
@@ -83,17 +89,23 @@
                       </thead>
                       <tbody>
                       <!--  -->
+                      <?php
+                      $no = 1;
+                      foreach(DB::query("SELECT * FROM tbl_layanan") as $layanan){
+                        echo"
                         <tr>
-                          <td> 1 </td>
-                          <td> Nama La </td>
-                          <td> Grooming Singa </td>
-                          <td> 2,000 </td>
-                          <td> <img src="" class="img img-responsive" alt=""> </td>
+                          <td>".$no++."</td>
+                          <td> {$layanan['nama_layanan']} </td>
+                          <td title=\"$layanan[keterangan]\"> ".substr($layanan['keterangan'],0,50)." ... </td>
+                          <td> ".number_format($layanan['harga'])." </td>
+                          <td> <img src=\"$layanan[gambar]\" class=\"img img-responsive\" alt=\"\"> </td>
                           <td> 
-                            <button type="button" class="btn btn-outline-warning">Edit</button>
-                            <button type="button" class="btn btn-outline-danger">Hapus</button>
+                            <button type=\"button\" onclick=\"layanan_edit('$layanan[id_layanan]')\" class=\"btn btn-outline-warning\">Edit</button>
+                            <button type=\"button\" onclick=\"layanan_delete('$layanan[id_layanan]')\" class=\"btn btn-outline-danger\">Hapus</button>
                           </td>
-                        </tr>
+                        </tr>";
+                      }
+                      ?>
                         <!--  -->
                       </tbody>
                     </table>
@@ -105,3 +117,42 @@
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
           <?php include_once 'partials/footer.php'?>
+          <script>
+          function layanan_edit(id){
+            $.ajax({
+              type: "POST",
+              url: "slave/layanan_crud.php?proses=get",
+              data: {id:id},
+              dataType: "JSON",
+              success: function (json) {
+                $('input[name=id_layanan]').val(json.id_layanan);
+                $('input[name=layanan_layanan]').val(json.nama_layanan);
+                $('input[name=harga]').val(json.harga);
+                $('textarea[name=keterangan]').html(json.keterangan);
+                $("#form").attr('action', 'slave/layanan_crud.php?proses=update');
+                $('html, body').animate({
+                    scrollTop: $(".page-title").offset().top
+                }, 700);
+                $("#warning").show();
+              }
+            });
+          }
+
+          function layanan_delete(id){
+            if(confirm("Yakin akan menghapus data ini?")===true){
+              window.open('slave/layanan_crud.php?proses=delete&id='+id,'_self');
+            }
+          }
+
+          function layanan_update(id){
+            $.ajax({
+              type: "POST",
+              url: "slave/layanan_crud.php?proses=update",
+              data: "data",
+              dataType: "dataType",
+              success: function (response) {
+                
+              }
+            });
+          }
+          </script>

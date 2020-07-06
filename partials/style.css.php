@@ -14,3 +14,9 @@
 <link rel="stylesheet" href="assets/css/demo_1/style.css">
 <!-- End Layout styles -->
 <link rel="shortcut icon" href="assets/images/favicon.png" />
+<style>
+.img-responsive:hover{
+    z-index:10;
+    transform: scale(7.5);
+}
+</style>

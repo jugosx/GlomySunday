@@ -19,24 +19,24 @@
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link" href="#">
         <i class="menu-icon typcn typcn-shopping-bag"></i>
         <span class="menu-title">Olah Data Admin</span>
       </a>
-    </li>
+    </li> -->
     <li class="nav-item">
       <a class="nav-link" href="layanan.php">
         <i class="menu-icon typcn typcn-shopping-bag"></i>
         <span class="menu-title">Olah Data Layanan</span>
       </a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link" href="harga.php">
         <i class="menu-icon typcn typcn-shopping-bag"></i>
         <span class="menu-title">Olah Data Harga</span>
       </a>
-    </li>
+    </li> -->
     <li class="nav-item">
       <a class="nav-link" href="pesanan.php">
         <i class="menu-icon typcn typcn-shopping-bag"></i>
