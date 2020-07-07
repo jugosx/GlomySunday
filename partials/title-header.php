@@ -36,3 +36,9 @@ if(isset($_GET['success'])){
 <?php
 }
 ?>
+
+<div class="alert alert-warning" style="display:none" id="warning">
+    <span>
+    <p>Jika ingin membatalkan perubahan pastikan tekan batal terlebih dahulu, agar data tidak tertimpa!</p>
+    </span>
+</div>

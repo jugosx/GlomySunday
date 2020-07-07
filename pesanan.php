@@ -1,3 +1,4 @@
+<?php include_once 'config/connection.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,27 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Petshop Mechin 4 | Kelola Pesanan</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="assets/vendors/iconfonts/ionicons/css/ionicons.css">
-    <link rel="stylesheet" href="assets/vendors/iconfonts/typicons/src/font/typicons.css">
-    <link rel="stylesheet" href="assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.addons.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!-- endinject -->
-    <!-- plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-    <!-- inject:css -->
-    <link rel="stylesheet" href="assets/css/shared/style.css">
-    <!-- endinject -->
-    <!-- Layout styles -->
-    <link rel="stylesheet" href="assets/css/demo_1/style.css">
-    <!-- End Layout styles -->
-    <link rel="shortcut icon" href="assets/images/favicon.png" />
+    <?php require 'partials/style.css.php' ?>
   </head>
   <body>
     <div class="container-scroller">
@@ -40,18 +21,7 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <!-- Page Title Header Starts-->
-            <div class="row page-title-header">
-              <div class="col-12">
-                <div class="page-header">
-                  <h4 class="page-title">Dashboard</h4>
-                  <div class="quick-link-wrapper w-100 d-md-flex flex-md-wrap">
-                    <ul class="quick-links">
-                      <li><a href="#">Olah Data Pesanan</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <?php include_once 'partials/title-header.php' ?>
             <!-- Page Title Header Ends-->
             
             <div class="row">
@@ -61,9 +31,9 @@
                         <h4 class="card-title">Form Pemesanan</h4>
                         <form class="forms-sample">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Id Pemesanan</label>
+                            <!-- <label class="col-sm-3 col-form-label">Id Pemesanan</label> -->
                             <div class="col-sm-6">
-                              <input type="number" class="form-control" placeholder="Enter ID Pesanan">
+                              <input type="hidden" class="form-control" placeholder="Enter ID Pesanan">
                             </div>
                           </div>
                           <div class="form-group row">
@@ -79,22 +49,33 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Kategori Layanan</label>
                             <div class="col-sm-6">
-                              <select class="form-control">
-                                <option>Mandi Besar</option>
-                                <option>Mandi Basah</option>
-                                <option>Kerokan</option>
-                                <option>Pijat +-</option>
+                              <select name="layanan" class="form-control">
+                               <option value="">-Pilih Layanan-</option>
+                               <?php
+                                  foreach(DB::query("SELECT id_layanan,nama_layanan FROM tbl_layanan") as $layanan){
+                                    echo "<option value=\"$layanan[id_layanan]\">$layanan[nama_layanan]</option>";
+                                  }
+                               ?>
                               </select>
                             </div>
                           </div>
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nama Pelanggan</label>
                             <div class="col-sm-6">
-                              <select class="form-control">
-                                <option>Alexander</option>
-                                <option>Tjong</option>
-                                <option>MeiMei</option>
+                              <select name="pelanggan" class="form-control">
+                              <option value="">-Pilih Pelanggan-</option>
+                               <?php
+                                  foreach(DB::query("SELECT id_pelanggan,nama FROM tbl_pelanggan") as $pel){
+                                    echo "<option value=\"$pel[id_pelanggan]\">$pel[nama]</option>";
+                                  }
+                               ?>
                               </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Keterangan</label>
+                              <div class="col-sm-6">
+                              <textarea name="keterangan" class="form-control" id="" cols="30" rows="10" placeholder="Keterangan"></textarea>
                             </div>
                           </div>
                           <div class="form-group row">

@@ -23,13 +23,7 @@
           <div class="content-wrapper">
             <!-- Page Title Header Starts-->
             <?php include_once 'partials/title-header.php' ?>
-            <!-- Page Title Header Ends-->
-            <div class="alert alert-warning" style="display:none" id="warning">
-              <span>
-                <p>Jika ingin membatalkan perubahan pastikan tekan batal terlebih dahulu, agar data tidak tertimpa!</p>
-              </span>
-            </div>
-            
+            <!-- Page Title Header Ends-->            
             <div class="row">
             <div class="col-12 stretch-card">
                     <div class="card">
