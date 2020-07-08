@@ -11,7 +11,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Petshop Mechin 4 | Kelola Pelanggan</title>
+    <title>Petshop Mechin 4 | Kelola Kandang</title>
     <!-- plugins:css -->
     <?php require 'partials/style.css.php' ?>
   </head>
@@ -34,36 +34,18 @@
             <div class="col-12 stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Form Pelanggan</h4>
-                        <form id="form" class="forms-sample" method="POST" action="slave/pelanggan_crud.php?proses=insert">
+                        <h4 class="card-title">Form Kandang</h4>
+                        <form id="form" class="forms-sample" method="POST" action="slave/kandang_crud.php?proses=insert">
                           <div class="form-group row">
-                            <!-- <label class="col-sm-3 col-form-label">Id Pelanggan</label> -->
+                            <!-- <label class="col-sm-3 col-form-label">Id kandang</label> -->
                             <div class="col-sm-6">
-                              <input type="hidden" name="id_pelanggan" class="form-control" placeholder="Enter ID Pelanggan">
+                              <input type="hidden" name="id_kandang" class="form-control" placeholder="Enter ID kandang">
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nama</label>
+                            <label class="col-sm-3 col-form-label">Nama Kandang</label>
                             <div class="col-sm-6">
-                              <input type="text" name="nama" class="form-control" placeholder="Nama Pelanggan">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Alamat</label>
-                            <div class="col-sm-6">
-                              <input type="text" name="alamat" class="form-control" placeholder="Alamat">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">No Telp</label>
-                            <div class="col-sm-6">
-                              <input type="number" name="notelp" class="form-control" placeholder="No Telp">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Email</label>
-                            <div class="col-sm-6">
-                              <input type="email" name="email" class="form-control" placeholder="Email">
+                              <input type="text" name="nama_kandang" class="form-control" placeholder="Nama kandang">
                             </div>
                           </div>
                           <button type="submit" class="btn btn-success mr-2">Simpan</button>
@@ -76,33 +58,30 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Olah Data Pelanggan</h4>
-                    <p class="card-description"> Olah Data <code>.Pelanggan</code> </p>
+                    <h4 class="card-title">Olah Data Kandang</h4>
+                    <p class="card-description"> Olah Data <code>.kandang</code> </p>
                     <table class="table table-bordered layanan">
                       <thead>
                         <tr>
                           <th> No </th>
-                          <th> Nama Pelanggan </th>
-                          <th> Alamat </th>
-                          <th> No. Telp </th>
-                          <th> Email </th>
+                          <th> Nama_kandang kandang </th>
+                          <th> Status </th>
                           <th> Aksi </th>
                         </tr>
                       </thead>
                       <tbody>
                       <?php
                       $no = 1;
-                      foreach(DB::query("SELECT * FROM tbl_pelanggan") as $pel){
+                      
+                      foreach(DB::query("SELECT * FROM tbl_kandang") as $pel){
+                        $status = $pel['status'] == 1 ? 'Terisi' : 'Kosong';
                         echo "<tr>
                         <td>".$no++."</td>
-                        <td> $pel[nama]</td>
-                        <td> $pel[alamat] </td>
-                        <td> $pel[notelp] </td>
-                        <td> $pel[email] </td>
-                        <td> 
-                          <button type=\"button\" class=\"btn btn-outline-primary\">Info</button>
-                          <button type=\"button\" onclick=\"pelanggan_edit('$pel[id_pelanggan]')\" class=\"btn btn-outline-warning\">Edit</button>
-                          <button type=\"button\" onclick=\"pelanggan_delete('$pel[id_pelanggan]')\" class=\"btn btn-outline-danger\">Hapus</button>
+                        <td> $pel[nama_kandang]</td>
+                        <td> $status </td>
+                        <td>
+                          <button type=\"button\" onclick=\"kandang_edit('$pel[id_kandang]')\" class=\"btn btn-outline-warning\">Edit</button>
+                          <button type=\"button\" onclick=\"kandang_delete('$pel[id_kandang]')\" class=\"btn btn-outline-danger\">Hapus</button>
                         </td>
                       </tr>";
                       }
@@ -118,19 +97,16 @@
           <!-- partial:partials/_footer.html -->
           <?php include_once 'partials/footer.php'?>
           <script>
-          function pelanggan_edit(id){
+          function kandang_edit(id){
             $.ajax({
               type: "POST",
-              url: "slave/pelanggan_crud.php?proses=get",
+              url: "slave/kandang_crud.php?proses=get",
               data: {id:id},
               dataType: "JSON",
               success: function (json) {
-                $('input[name=id_pelanggan]').val(json.id_pelanggan);
-                $('input[name=nama]').val(json.nama);
-                $('input[name=alamat]').val(json.alamat);
-                $('input[name=notelp]').val(json.notelp);
-                $('input[name=email]').val(json.email);
-                $("#form").attr('action', 'slave/pelanggan_crud.php?proses=update');
+                $('input[name=id_kandang]').val(json.id_kandang);
+                $('input[name=nama_kandang]').val(json.nama_kandang);
+                $("#form").attr('action', 'slave/kandang_crud.php?proses=update');
                 $('html, body').animate({
                     scrollTop: $(".page-title").offset().top
                 }, 700);
@@ -139,16 +115,16 @@
             });
           }
 
-          function pelanggan_delete(id){
+          function kandang_delete(id){
             if(confirm("Yakin akan menghapus data ini?")===true){
-              window.open('slave/pelanggan_crud.php?proses=delete&id='+id,'_self');
+              window.open('slave/kandang_crud.php?proses=delete&id='+id,'_self');
             }
           }
 
-          function pelanggan_update(id){
+          function kandang_update(id){
             $.ajax({
               type: "POST",
-              url: "slave/pelanggan_crud.php?proses=update",
+              url: "slave/kandang_crud.php?proses=update",
               data: "data",
               dataType: "dataType",
               success: function (response) {

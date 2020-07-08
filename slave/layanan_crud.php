@@ -26,7 +26,7 @@ switch($proses){
         header('location:../layanan.php?success');
     break;
     case 'get':
-        $data = DB::queryFirstRow("SELECT * FROM tbl_layanan WHERE id_layanan = %i",$_POST['id']);
+        $data = DB::queryFirstRow("SELECT * FROM tbl_layanan WHERE id_layanan = %i",$_REQUEST['id']);
         echo json_encode($data);
     break;
     case 'update':

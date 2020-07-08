@@ -44,9 +44,21 @@
       </a>
     </li>
     <li class="nav-item">
+      <a class="nav-link" href="grommer.php">
+        <i class="menu-icon typcn typcn-group"></i>
+        <span class="menu-title">Olah Data Grommer</span>
+      </a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" href="pelanggan.php">
         <i class="menu-icon typcn typcn-shopping-bag"></i>
         <span class="menu-title">Olah Data Pelanggan</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="kandang.php">
+        <i class="menu-icon typcn typcn-shopping-bag"></i>
+        <span class="menu-title">Olah Data Kandang</span>
       </a>
     </li>
     </ul>
