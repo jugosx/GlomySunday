@@ -4,7 +4,7 @@
         <h4 class="page-title">Dashboard</h4>
         <div class="quick-link-wrapper w-100 d-md-flex flex-md-wrap">
         <ul class="quick-links">
-            <li><a href="#"><?= $title ?></a></li>
+            <!-- <li><a href="#"><?= $title ?></a></li> -->
         </ul>
         </div>
     </div>
