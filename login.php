@@ -26,13 +26,24 @@
         <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
           <div class="row w-100">
             <div class="col-lg-4 mx-auto">
+            <?php 
+              if(isset($_GET['pesan'])){
+                if($_GET['pesan'] == "gagal"){
+                  echo "Login gagal! username dan password salah!";
+                }else if($_GET['pesan'] == "logout"){
+                  echo "Anda telah berhasil logout";
+                }else if($_GET['pesan'] == "belum_login"){
+                  echo "Anda harus login untuk mengakses halaman admin";
+                }
+              }
+              ?>
               <div class="auto-form-wrapper">
-                <form action="#">
+                <form action="authenticate.php" method="POST">
                     <h2><center>SILAHKAN LOGIN TERLEBIH DAHULU</center></h2>
                   <div class="form-group">
                     <label class="label">Nama Pengguna</label>
                     <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Nama Pengguna">
+                      <input type="text" class="form-control" name="username" require="" placeholder="Nama Pengguna">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="mdi mdi-check-circle-outline"></i>
@@ -43,7 +54,7 @@
                   <div class="form-group">
                     <label class="label">Sandi</label>
                     <div class="input-group">
-                      <input type="password" class="form-control" placeholder="*********">
+                      <input type="password" name="password" require="" class="form-control" placeholder="*********">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="mdi mdi-check-circle-outline"></i>
@@ -52,7 +63,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <button class="btn btn-primary submit-btn btn-block">Login</button>
+                    <button type="submit" class="btn btn-primary submit-btn btn-block">Login</button>
                     <button class="btn btn-info submit-btn btn-block">Daftar</button>
                   </div>
                   <div class="form-group d-flex justify-content-between">
@@ -62,6 +73,9 @@
                     </div>
                   </div>
                 </form>
+                <?php if(isset($_GET['pesan'])) {  ?>
+                  <label style="color:red;"><?php echo $_GET['pesan']; ?></label>
+                <?php } ?>
               </div>
             </div>
           </div>
