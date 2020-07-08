@@ -31,10 +31,10 @@
             <div class="col-lg-4 mx-auto">
               <h2 class="text-center mb-4">REGISTRASI USER</h2>
               <div class="auto-form-wrapper">
-                <form action="#">
+                <form method="POST" action="slave/slave_register.php?proses=insert">
                   <div class="form-group">
                       <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Nama">
+                      <input type="text" name="nama" class="form-control" placeholder="Nama">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="mdi mdi-check-circle-outline"></i>
@@ -44,7 +44,7 @@
                         </div>
                     <div class="form-group">
                     <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Alamat">
+                      <input type="text" name="alamat" class="form-control" placeholder="Alamat">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="mdi mdi-check-circle-outline"></i>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="form-group">
                     <div class="input-group">
-                      <input type="number" class="form-control" placeholder="No HP">
+                      <input name="notelp" type="number" class="form-control" placeholder="No HP">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="mdi mdi-check-circle-outline"></i>
@@ -64,7 +64,7 @@
                     </div>  
                     <div class="form-group">
                     <div class="input-group">
-                      <input type="email" class="form-control" placeholder="Email">
+                      <input type="email" name="email" class="form-control" placeholder="Email">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="mdi mdi-check-circle-outline"></i>
@@ -74,17 +74,7 @@
                   </div>
                   <div class="form-group">
                     <div class="input-group">
-                      <input type="password" class="form-control" placeholder="Password">
-                      <div class="input-group-append">
-                        <span class="input-group-text">
-                          <i class="mdi mdi-check-circle-outline"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="input-group">
-                      <input type="password" class="form-control" placeholder="Confirm Password">
+                      <input type="password" name="password" class="form-control" placeholder="Password">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="mdi mdi-check-circle-outline"></i>
