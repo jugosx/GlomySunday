@@ -89,13 +89,13 @@
                       foreach(DB::query("SELECT * FROM tbl_pelanggan") as $pel){
                         echo "<tr>
                         <td>".$no++."</td>
-                        <td>$pel[nama]</td>
+                        <td> $pel[nama]</td>
                         <td> $pel[alamat] </td>
                         <td> $pel[notelp] </td>
                         <td> $pel[email] </td>
                         <td> 
                           <button type=\"button\" class=\"btn btn-outline-primary\">Info</button>
-                          <button type=\"button\" class=\"btn btn-outline-warning\">Edit</button>
+                          <button type=\"button\" onclick=\"pelanggan_edit('$pel[id_pelanggan]')\" class=\"btn btn-outline-warning\">Edit</button>
                           <button type=\"button\" onclick=\"pelanggan_delete('$pel[id_pelanggan]')\" class=\"btn btn-outline-danger\">Hapus</button>
                         </td>
                       </tr>";
@@ -119,7 +119,12 @@
               data: {id:id},
               dataType: "JSON",
               success: function (json) {
-               
+                $('input[name=id_pelanggan]').val(json.id_pelanggan);
+                $('input[name=nama]').val(json.nama);
+                $('input[name=alamat]').val(json.alamat);
+                $('input[name=notelp]').val(json.notelp);
+                $('input[name=email]').val(json.email);
+                $("#form").attr('action', 'slave/pelanggan_crud.php?proses=update');
                 $('html, body').animate({
                     scrollTop: $(".page-title").offset().top
                 }, 700);

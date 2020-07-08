@@ -14,7 +14,7 @@ switch($proses){
             }
         }
         $data = [
-            'nama_layanan'  => $_POST['layanan_layanan'],
+            'nama_layanan'  => $_POST['nama_layanan'],
             'keterangan'    => $_POST['keterangan'],
             'harga'         => $_POST['harga'],
             'gambar'        => str_replace('../','',$gambar)
@@ -43,7 +43,7 @@ switch($proses){
             }
         }
         $data = [
-            'nama_layanan'  => $_POST['layanan_layanan'],
+            'nama_layanan'  => $_POST['nama_layanan'],
             'keterangan'    => $_POST['keterangan'],
             'harga'         => $_POST['harga'],
             'gambar'        => str_replace('../','',$gambar)

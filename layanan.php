@@ -34,7 +34,7 @@
                             <input type="hidden" name="id_layanan">
                             <label class="col-sm-3 col-form-label">Nama Layanan</label>
                               <div class="col-sm-6">
-                              <input type="text" name="layanan_layanan" class="form-control" placeholder="Nama Layanan">
+                              <input type="text" name="nama_layanan" class="form-control" placeholder="Nama Layanan">
                             </div>
                           </div>
                           <!--  -->
@@ -120,7 +120,7 @@
               dataType: "JSON",
               success: function (json) {
                 $('input[name=id_layanan]').val(json.id_layanan);
-                $('input[name=layanan_layanan]').val(json.nama_layanan);
+                $('input[name=nama_layanan]').val(json.nama_layanan);
                 $('input[name=harga]').val(json.harga);
                 $('textarea[name=keterangan]').html(json.keterangan);
                 $("#form").attr('action', 'slave/layanan_crud.php?proses=update');

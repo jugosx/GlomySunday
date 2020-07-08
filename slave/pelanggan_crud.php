@@ -14,6 +14,18 @@ switch($proses){
         echo json_encode($data);
     break;
     case 'update':
+        $data = [
+            'nama'      => $_POST['nama'],
+            'alamat'    => $_POST['alamat'],
+            'notelp'    => $_POST['notelp'],
+            'email'     => $_POST['email']
+        ];
+        $save = DB::update('tbl_pelanggan',$data,"id_pelanggan=%i",$_POST['id_pelanggan']);
+        if(!$save){
+            // unlink($gambar);
+            header('location:../pelanggan.php?error');
+        }
+        header('location:../pelanggan.php?success');
     break;
     case 'delete':
         if(DB::delete('tbl_pelanggan','id_pelanggan=%i',$_GET['id'])){
