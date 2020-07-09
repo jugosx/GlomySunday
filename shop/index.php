@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php include_once '../config/connection.php'; ?>
 <html>
    <head>
       <meta charset="utf-8">
@@ -108,135 +109,28 @@
             <!-- /row -->
             <div class="price-table margin1">
                <!-- Price table 1 -->
-               <div class="col-lg-3 col-md-6">
-                  <div class="plan">
-                     <!-- price table header -->
-                     <header>
-                        <i class="flaticon-track"></i>
-                        <h5 class="plan-title">
-                           Basic
-                        </h5>
-                        <div class="plan-cost"><span class="plan-price">$99</span></div>
-                     </header>
-                     <!-- plan features -->
-                     <ul class="plan-features">
-                        <li>Vet Services
-                        </li>
-                        <li>Dog Walking
-                        </li>
-                        <li>Premium Pet Food
-                        </li>
-                        <li>Pet Hotel
-                        </li>
-                        <li>24/7 Support
-                        </li>
-                        <li>Special Services
-                        </li>
-                     </ul>
-                     <!-- /plan features -->
-                     <!-- button -->
-                     <div class="text-center">
-                        <a class="btn" href="order.php">Order</a>
-                     </div>
-                     <!-- /text-center -->  
-                  </div>
-               </div>
+               
                <!-- /Price table 1 -->
                <!-- Price table 2 -->
-               <div class="col-lg-3 col-md-6">
-                  <div class="plan">
-                     <!-- price table header -->
-                     <header>
-                        <i class="flaticon-toyger-cat"></i>
-                        <h5 class="plan-title">
-                           Business
-                        </h5>
-                        <div class="plan-cost"><span class="plan-price">$199</span></div>
-                     </header>
-                     <!-- plan features -->
-                     <ul class="plan-features">
-                        <li>Vet Services
-                        </li>
-                        <li>Dog Walking
-                        </li>
-                        <li>Premium Pet Food
-                        </li>
-                        <li>Pet Hotel
-                        </li>
-                        <li>24/7 Support
-                        </li>
-                        <li>Special Services
-                        </li>
-                     </ul>
-                     <!--/ plan features -->
-                     <!-- button -->
-                     <div class="text-center">
-                        <a class="btn" href="order.php">Order</a>
-                     </div>
-                     <!-- /text-center -->
-                  </div>
-               </div>
+               
                <!-- /Price table 2 -->
                <!-- Price table 3 -->
-               <div class="col-lg-3 col-md-6">
-                  <div class="plan featured">
-                     <!-- price table header -->
-                     <header>
-                        <i class="flaticon-long-haired-dog-head"></i>
-                        <h5 class="plan-title">
-                           Special
-                        </h5>
-                        <div class="plan-cost"><span class="plan-price">$450</span></div>
-                     </header>
-                     <!-- plan features -->
-                     <ul class="plan-features">
-                        <li>Vet Services
-                        </li>
-                        <li>Dog Walking
-                        </li>
-                        <li>Premium Pet Food
-                        </li>
-                        <li>Pet Hotel
-                        </li>
-                        <li>24/7 Support
-                        </li>
-                        <li>Special Services
-                        </li>
-                     </ul>
-                     <!--/ plan features -->
-                     <!-- button -->
-                     <div class="text-center">
-                        <a class="btn" href="order.php">Order</a>
-                     </div>
-                     <!-- /text-center -->
-                  </div>
-               </div>
+               
                <!-- /Price table 3 -->
-               <!-- Price table 4 -->
-               <div class="col-lg-3 col-md-6">
+               <?php foreach (DB::query("SELECT * FROM tbl_layanan") as $layanan): ?>
+                  <div class="col-lg-3 col-md-6">
                   <div class="plan">
                      <!-- price table header -->
                      <header>
                         <i class="flaticon-dog"></i>
                         <h5 class="plan-title">
-                           Extreme
+                        <?php echo $layanan['nama_layanan'] ?>
                         </h5>
-                        <div class="plan-cost"><span class="plan-price">$999</span></div>
+                        <div class="plan-cost"><span class="plan-price">Rp. <?php echo number_format($layanan['harga']) ?></span></div>
                      </header>
                      <!-- plan features -->
                      <ul class="plan-features">
-                        <li>Vet Services
-                        </li>
-                        <li>Dog Walking
-                        </li>
-                        <li>Premium Pet Food
-                        </li>
-                        <li>Pet Hotel
-                        </li>
-                        <li>24/7 Support
-                        </li>
-                        <li>Special Services
-                        </li>
+                     <?php echo $layanan['keterangan'] ?>
                      </ul>
                      <!-- /plan features -->
                      <!-- button -->
@@ -246,6 +140,10 @@
                      <!-- /text-center -->
                   </div>
                </div>
+                  <?php endforeach ?>
+               <!-- Price table 4 -->
+               
+               
                <!-- /Price table 4 -->
             </div>
             <!-- /Price tables  ends -->

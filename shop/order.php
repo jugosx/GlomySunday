@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<?php include_once '../config/connection.php'; ?>
    
 <!-- Mirrored from ingridkuhn.com/themes/petz/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Jul 2020 08:03:37 GMT -->
 <head>
@@ -68,7 +69,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-brand-centered">
                <ul class="nav navbar-nav">
-                  <li><a href="index.html">Home</a></li>
+                  <li><a href="index.php">Home</a></li>
                </ul>
               
             </div>
@@ -105,9 +106,9 @@
                <!-- /col-lg-5-->
                <!-- Contact Form -->
                <div class="col-lg-6 col-md-6 col-lg-offset-1 col-md-offset-1 res-margin">
-			     <h3>Write us</h3>
+			     <h3>Order</h3>
                   <!-- Form Starts -->
-                  <div id="contact_form">
+                  <!-- <div id="contact_form">
                      <div class="form-group">
                         <label>Name<span class="required">*</span></label>
                         <input type="text" name="name" class="form-control input-field" required="">                    
@@ -119,7 +120,78 @@
                         <textarea name="message" id="message" class="textarea-field form-control" rows="3"  required=""></textarea>
                      </div>
                      <button type="submit" id="submit_btn" value="Submit" class="btn center-block">Order</button>
-                  </div>
+                  </div> -->
+
+                  <form class="forms-sample" id="form" method="post" action="../slave/order_cust.php?proses=insert" enctype="multipart/form-data">
+                          <div class="form-group row">
+                            <!-- <label class="col-sm-3 col-form-label">Id Pemesanan</label> -->
+                            <div class="col-sm-6">
+                              <input type="hidden" class="form-control" placeholder="Enter ID Pesanan">
+                            </div>
+                          </div>
+                          
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Kategori Layanan</label>
+                            <div class="col-sm-6">
+                              <select name="id_layanan" class="form-control">
+                               <option value="">-Pilih Layanan-</option>
+                               <?php
+                                  foreach(DB::query("SELECT id_layanan,nama_layanan FROM tbl_layanan") as $layanan){
+                                    echo "<option value=\"$layanan[id_layanan]\">$layanan[nama_layanan]</option>";
+                                  }
+                               ?>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nama Pelanggan</label>
+                            <div class="col-sm-6">
+                              <select name="id_pelanggan" class="form-control">
+                              <option value="">-Pilih Pelanggan-</option>
+                               <?php
+                                  foreach(DB::query("SELECT id_pelanggan,nama FROM tbl_pelanggan") as $pel){
+                                    echo "<option value=\"$pel[id_pelanggan]\">$pel[nama]</option>";
+                                  }
+                               ?>
+                              </select>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Keterangan</label>
+                              <div class="col-sm-6">
+                              <textarea name="keterangan" class="form-control" id="" cols="30" rows="10" placeholder="Keterangan"></textarea>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Hewan</label>
+                            <div class="col-sm-6">
+                              <input name ="jenis_hewan" type="text" class="form-control" placeholder="Hewan">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Harga</label>
+                            <div class="col-sm-6">
+                              <select name="harga" class="form-control">
+                               <?php
+                                  foreach(DB::query("SELECT id_layanan,nama_layanan,harga FROM tbl_layanan") as $layanan){
+                                    echo "<option value=\"$layanan[id_layanan]\">$layanan[nama_layanan] Rp. ".number_format($layanan['harga'])."</option>";
+                                  }
+                               ?>
+                              </select>
+                            </div>
+                          </div>
+                          <!-- <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Bukti Pembayaran</label>
+                              <div class="col-sm-6">
+                              <input type="file" name="gambar" class="form-control">
+                            </div>
+                          </div> -->
+                          
+                          
+                          <button type="submit" class="btn center-block">Order</button>
+                          <!-- <button class="btn btn-light">Batal</button> -->
+                        </form>
                   <!-- Contact results -->
                   <div id="contact_results"></div>
                </div>
