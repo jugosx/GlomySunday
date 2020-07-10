@@ -136,7 +136,7 @@ include 'sess_cust.php';
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Kategori Layanan</label>
                             <div class="col-sm-6">
-                              <select name="id_layanan" class="form-control" onchange="getharga(this)">
+                              <select name="id_layanan" class="form-control" onchange="getharga()">
                                <option value="">-Pilih Layanan-</option>
                                <?php
                                   foreach(DB::query("SELECT id_layanan,nama_layanan,harga FROM tbl_layanan") as $layanan){
@@ -175,17 +175,23 @@ include 'sess_cust.php';
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Harga</label>
                             <div class="col-sm-6">
-                              <input name="total_harga" type="text" class="form-control" readonly placeholder="Total harga">
+                              <input name="total_harga" type="text" class="form-control" disabled placeholder="Total harga">
                             </div>
+                          </div>                          
+                          <div id="form-penitipan" class="hide">
+                           <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Check-in</label>
+                                 <div class="col-sm-6">
+                                 <input type="date" name="checkin" class="form-control">
+                              </div>
+                           </div>
+                           <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Check-out</label>
+                                 <div class="col-sm-6">
+                                 <input type="date" name="checkout" class="form-control">
+                              </div>
+                           </div>
                           </div>
-                          <!-- <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Bukti Pembayaran</label>
-                              <div class="col-sm-6">
-                              <input type="file" name="gambar" class="form-control">
-                            </div>
-                          </div> -->
-                          
-                          
                           <button type="submit" class="btn center-block">Order</button>
                           <!-- <button class="btn btn-light">Batal</button> -->
                         </form>
@@ -244,13 +250,21 @@ include 'sess_cust.php';
       </footer>
       <!-- /footer ends -->
       <!-- Core JavaScript Files -->
+      <script src="js/jquery.min.js"></script>
       <script>
-      function getharga(this){
-         harga = $('option:selected', this).attr('harga');
-         alert(harga)
+      function getharga(){
+         var harga = $('option:selected', $("select[name=id_layanan]")).attr('harga');
+         var tipe = $('option:selected', $("select[name=id_layanan]")).val();
+         if(/(^|\s)(Penitipan+\w+)/g.exec(tipe)){
+            console.log(true)
+         }
+         if(harga == undefined){
+            harga = 0;
+         }
+         $("input[name=total_harga]").val(harga);
+         console.log(harga);
       }
       </script>
-      <script src="js/jquery.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
       <!-- Main Js -->
       <script src="js/main.js"></script>
@@ -262,13 +276,6 @@ include 'sess_cust.php';
       <script src="js/plugins.js"></script>
       <!-- Prefix free CSS -->
       <script src="js/prefixfree.js"></script>
-<!-- Bootstrap Select Tool (For Module #4) -->
-	<script src="switcher/js/bootstrap-select.js"></script>
-	<!-- UI jQuery (For Module #5 and #6) -->
-	<script src="../../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.js" type="text/javascript"></script>
-	<!-- All Scripts & Plugins -->
-	<script src="switcher/js/dmss.js"></script>
-   </body>
 
 <!-- Mirrored from ingridkuhn.com/themes/petz/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Jul 2020 08:03:40 GMT -->
 </html>
