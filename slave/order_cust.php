@@ -1,30 +1,19 @@
 <?php
+session_start();
 require '../config/connection.php';
 $proses = $_GET['proses'];
 switch($proses){
     case 'insert':
-        $gambar = "";
-        if($_FILES['gambar']['size'] > 0){
-            $path = '../gambar/';
-            $save_path = $path.$_FILES['gambar']['name'].date('YmdHis');
-            if(move_uploaded_file($_FILES['gambar']['tmp_name'],$save_path)){
-                $gambar = $save_path;
-            }else{
-                header('location:../shop/order.php?error');
-            }
-        }
         $data = [
-            'tanggal'  => $_POST['tanggal'],
-            'id_pelanggan'    => $_POST['id_pelanggan'],
+            'tanggal'  => date('Y-m-d'),
+            'id_pelanggan'    => $_SESSION['id_pel'],
             'id_layanan'         => $_POST['id_layanan'],
-            'status'         => $_POST['status'],
+            'status'         => 0,
             'jenis_hewan'         => $_POST['jenis_hewan'],
             'keterangan'         => $_POST['keterangan'],
-            'status_progress'         => $_POST['status_progress'],
             'id_grommer'         => $_POST['id_grommer'],
-            'checkin'         => $_POST['checkin'],
-            'checkout'         => $_POST['checkout'],
-            'gambar'        => str_replace('../','',$gambar)
+            'checkin'           => date_format(date_create($_POST['checking']),'Y-m-d'),
+            'checkout'           => date_format(date_create($_POST['checkoutg']),'Y-m-d')
         ];
         $save = DB::insert('tbl_pemesanan',$data);
         if(!$save){

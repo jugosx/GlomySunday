@@ -178,7 +178,7 @@ include 'sess_cust.php';
                               <input name="total_harga" type="text" class="form-control" disabled placeholder="Total harga">
                             </div>
                           </div>                          
-                          <div id="form-penitipan" class="hide">
+                          <div id="form-penitipan" style="display:none">
                            <div class="form-group row">
                               <label class="col-sm-3 col-form-label">Check-in</label>
                                  <div class="col-sm-6">
@@ -254,13 +254,12 @@ include 'sess_cust.php';
       <script>
       function getharga(){
          var harga = $('option:selected', $("select[name=id_layanan]")).attr('harga');
-         var tipe = $('option:selected', $("select[name=id_layanan]")).val();
-         if(/(^|\s)(Penitipan+\w+)/g.exec(tipe)){
-            console.log(true)
+         var tipe = $('option:selected', $("select[name=id_layanan]")).text();
+         
+         if(tipe.includes("Penitipan")){
+            $("#form-penitipan").show();
          }
-         if(harga == undefined){
-            harga = 0;
-         }
+
          $("input[name=total_harga]").val(harga);
          console.log(harga);
       }

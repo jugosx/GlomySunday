@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php include_once '../config/connection.php';
-include 'sess_cust.php';
+require 'sess_cust.php';
  ?>
 <html>
    <head>
@@ -63,7 +63,8 @@ include 'sess_cust.php';
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-brand-centered">
                <ul class="nav navbar-nav">
-                  <li class="active"><a href="index.php">Home</a></li>
+                  <li class=""><a href="index.php">Home</a></li>
+                  <li  class="active" ><a href="history.php">Riwayat Order</a></li>
                </ul>
                <ul class="nav navbar-nav navbar-right">
                   <!-- <li><a href="gallery.html">Gallery</a></li>
@@ -74,7 +75,7 @@ include 'sess_cust.php';
                         <li><a href="blog-single.html">Blog Post</a></li>
                      </ul>
                   </li> -->
-                  <li><a href="history.php">Lacak</a></li>
+                  <li><a href="logout.php">Logout</a></li>
                </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -104,7 +105,6 @@ include 'sess_cust.php';
                           <th> No </th>
                           <th> Tanggal </th>
                           <th> Layanan </th>
-                          <th> Pelanggan </th>
                           <th> Status Pembayaran </th>
                           <th> Keterangan </th>
                           <th> Bukti Bayar </th>
@@ -119,17 +119,20 @@ include 'sess_cust.php';
                         <!--  -->
                       <?php
                       $no = 1;
-                      foreach(DB::query("SELECT * FROM tbl_pemesanan WHERE id_pelanggan = %i",$_SESSION['nama']) as $pesanan){
+                      foreach(DB::query("SELECT tbl_pemesanan.*, nama_layanan FROM tbl_pemesanan LEFT JOIN tbl_layanan ON tbl_layanan.id_layanan=tbl_pemesanan.id_layanan WHERE id_pelanggan = %i",$_SESSION['id_pel']) as $pesanan){
+                        $status = "Menunggu Pembayaran"; 
+                        if($pesanan['status'] == 1){
+                           $status = "Lunas";
+                         }
                         echo"
                         <tr>
                           <td>".$no++."</td>
-                          <td> {$pesanan['tanggal']} </td>
-                          <td> {$pesanan['id_layanan']} </td>
-                          <td> {$pesanan['id_pelanggan']} </td>
-                          <td> {$pesanan['status']} </td>
+                          <td>".date_format(date_create($pesanan['tanggal']),'d-m-Y')."</td>
+                          <td> {$pesanan['nama_layanan']} </td>
+                          <td> {$status} </td>
                           <td title=\"$pesanan[keterangan]\"> ".substr($pesanan['keterangan'],0,50)." ... </td>
-                          <td> <img src=\"$pesanan[gambar]\" class=\"img img-responsive\" alt=\"\"> </td>
-                          <td> ".number_format($pesanan['id_layanan'])." </td>
+                          <td> <img src=\"$pesanan[bukti_pembayaran]\" class=\"img img-responsive\" alt=\"\"> </td>
+                          <td> ".number_format(harga($pesanan['id_pemesanan']))." </td>
                           <td> {$pesanan['status_progress']} </td>
                           <td> {$pesanan['id_grommer']} </td>
                           <td> {$pesanan['checkin']} </td>

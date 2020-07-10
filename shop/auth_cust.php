@@ -9,16 +9,14 @@ include '../config/connection.php';
 $nama = $_POST['nama'];
 $password = $_POST['password'];
 
-// menyeleksi data admin dengan username dan password yang sesuai
-// $data = mysqli_query("select * from tbl_admin where username='$username' and password='$password'");
-$data = DB::queryRaw("SELECT * FROM tbl_pelanggan WHERE email='$nama' and password='$password'");
-// echo json_encde($data);
-// menghitung jumlah data yang ditemukan
-// $cek = mysqli_num_rows($data);
-$row = $data->fetch_assoc();
+//cek ambil data
+$data = DB::queryFirstRow("SELECT * FROM tbl_pelanggan WHERE email='$nama' and password='$password'");
 
-if($row > 0){
+//jika data lebih dari 0 maka ada data
+if(count($data) > 0){
+	extract($data);
 	$_SESSION['nama'] = $nama;
+	$_SESSION['id_pel'] = $id_pelanggan;
 	$_SESSION['status'] = "login";
 	header("location:index.php");
 }else{

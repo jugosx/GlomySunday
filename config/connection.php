@@ -7,3 +7,23 @@ DB::$dbName = 'vetshop';
 
 DB::$error_handler = false;
 DB::$throw_exception_on_error = true;
+
+function harga($id_pesanan){
+    $data = DB::queryFirstRow("SELECT a.*, b.harga FROM tbl_pemesanan a JOIN tbl_layanan b ON b.id_layanan = a.id_layanan WHERE a.id_pemesanan = '$id_pesanan'");
+
+    extract($data);
+
+    if($checkin != ''){
+        $checkin = strtotime($checkin);
+        $checkout = strtotime($checkout);
+
+        $timedif = abs($checkout - $checkout);
+        $hari = $timedif/86400;
+
+        $hari = intval($hari);
+        $harga = $hari * $harga;
+    }
+
+    return $harga;
+
+}
