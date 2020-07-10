@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-<?php include_once '../config/connection.php'; ?>
+<?php 
+include_once '../config/connection.php'; 
+include 'sess_cust.php';
+?>
    
 <!-- Mirrored from ingridkuhn.com/themes/petz/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Jul 2020 08:03:37 GMT -->
 <head>
@@ -133,17 +136,17 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Kategori Layanan</label>
                             <div class="col-sm-6">
-                              <select name="id_layanan" class="form-control">
+                              <select name="id_layanan" class="form-control" onchange="getharga(this)">
                                <option value="">-Pilih Layanan-</option>
                                <?php
-                                  foreach(DB::query("SELECT id_layanan,nama_layanan FROM tbl_layanan") as $layanan){
-                                    echo "<option value=\"$layanan[id_layanan]\">$layanan[nama_layanan]</option>";
+                                  foreach(DB::query("SELECT id_layanan,nama_layanan,harga FROM tbl_layanan") as $layanan){
+                                    echo "<option harga=\"$layanan[harga]\" value=\"$layanan[id_layanan]\">$layanan[nama_layanan]</option>";
                                   }
                                ?>
                               </select>
                             </div>
                           </div>
-                          <div class="form-group row">
+                          <!-- <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nama Pelanggan</label>
                             <div class="col-sm-6">
                               <select name="id_pelanggan" class="form-control">
@@ -155,7 +158,7 @@
                                ?>
                               </select>
                             </div>
-                          </div>
+                          </div> -->
                           
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Keterangan</label>
@@ -172,13 +175,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Harga</label>
                             <div class="col-sm-6">
-                              <select name="harga" class="form-control">
-                               <?php
-                                  foreach(DB::query("SELECT id_layanan,nama_layanan,harga FROM tbl_layanan") as $layanan){
-                                    echo "<option value=\"$layanan[id_layanan]\">$layanan[nama_layanan] Rp. ".number_format($layanan['harga'])."</option>";
-                                  }
-                               ?>
-                              </select>
+                              <input name="total_harga" type="text" class="form-control" readonly placeholder="Total harga">
                             </div>
                           </div>
                           <!-- <div class="form-group row">
@@ -247,6 +244,12 @@
       </footer>
       <!-- /footer ends -->
       <!-- Core JavaScript Files -->
+      <script>
+      function getharga(this){
+         harga = $('option:selected', this).attr('harga');
+         alert(harga)
+      }
+      </script>
       <script src="js/jquery.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
       <!-- Main Js -->
@@ -264,7 +267,7 @@
 	<!-- UI jQuery (For Module #5 and #6) -->
 	<script src="../../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.js" type="text/javascript"></script>
 	<!-- All Scripts & Plugins -->
-	<script src="switcher/js/dmss.js"></script>		  
+	<script src="switcher/js/dmss.js"></script>
    </body>
 
 <!-- Mirrored from ingridkuhn.com/themes/petz/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Jul 2020 08:03:40 GMT -->

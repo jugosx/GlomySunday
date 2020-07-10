@@ -11,7 +11,7 @@ $password = $_POST['password'];
 
 // menyeleksi data admin dengan username dan password yang sesuai
 // $data = mysqli_query("select * from tbl_admin where username='$username' and password='$password'");
-$data = DB::queryRaw("SELECT * FROM tbl_pelanggan WHERE nama='$nama' and password='$password'");
+$data = DB::queryRaw("SELECT * FROM tbl_pelanggan WHERE email='$nama' and password='$password'");
 // echo json_encde($data);
 // menghitung jumlah data yang ditemukan
 // $cek = mysqli_num_rows($data);

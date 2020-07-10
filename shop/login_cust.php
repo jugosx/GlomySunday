@@ -41,9 +41,9 @@
                 <form action="auth_cust.php" method="POST">
                     <h2><center>SILAHKAN LOGIN TERLEBIH DAHULU</center></h2>
                   <div class="form-group">
-                    <label class="label">Nama Pengguna</label>
+                    <label class="label">Email Pengguna</label>
                     <div class="input-group">
-                      <input type="text" class="form-control" name="nama" require="" placeholder="Nama Pengguna">
+                      <input type="email" class="form-control" name="nama" require="" placeholder="Email Pengguna">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="mdi mdi-check-circle-outline"></i>
@@ -64,7 +64,7 @@
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary submit-btn btn-block">Login</button>
-                    <button class="btn btn-info submit-btn btn-block">Daftar</button>
+                    <a href="register.php" class="btn btn-info submit-btn btn-block">Daftar</a>
                   </div>
                   <div class="form-group d-flex justify-content-between">
                     <div class="form-check form-check-flat mt-0">

@@ -27,6 +27,17 @@ switch($proses){
         }
         header('location:../pelanggan.php?success');
     break;
+    case 'reset':
+        $data = [
+            'password'     => 12345
+        ];
+        $save = DB::update('tbl_pelanggan',$data,"id_pelanggan=%i",$_GET['id']);
+        if(!$save){
+            // unlink($gambar);
+            header('location:../pelanggan.php?error');
+        }
+        header('location:../pelanggan.php?success');
+    break;
     case 'delete':
         if(DB::delete('tbl_pelanggan','id_pelanggan=%i',$_GET['id'])){
             header('location:../pelanggan.php?success');
