@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<?php include_once '../config/connection.php'; ?>
+<?php include_once '../config/connection.php';
+include 'sess_cust.php';
+ ?>
 <html>
    <head>
       <meta charset="utf-8">
@@ -61,7 +63,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-brand-centered">
                <ul class="nav navbar-nav">
-                  <li class="active"><a href="">Home</a></li>
+                  <li class="active"><a href="index.php">Home</a></li>
                </ul>
                <ul class="nav navbar-nav navbar-right">
                   <!-- <li><a href="gallery.html">Gallery</a></li>
@@ -85,67 +87,73 @@
          <div class="jumbotron" data-stellar-background-ratio="0.5">
             <!-- Heading -->
             <div class="jumbo-heading" data-stellar-background-ratio="1.2">
-               <h1>Layanan</h1>
+               <h1>Lacak</h1>
             </div>
          </div>
          <!-- container -->
          <div class="container">
             <div class="row">
-               <div class="col-md-7 col-md-offset-1 text-center">
-                  <h3>Our Plans</h3>
-                  <p>Elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset phas ellus ac sodales Lorem ipsum dolor Phas ellus 
-                     consectetur adipisicing elit uasi quidem minus id omnis a nibh fusce mollis imperdie tlorem ipuset campas fincas
-                     Lorem ipsum dolor Phas ellus ac sodales felis tiam.
-                  </p>
-                  <a class="btn" href="#">Contact us</a>
-               </div>
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Lacak Pesanan</h4>
+                    <p class="card-description"> Lacak <code>.Pesanan</code> </p>
+                    <table class="table table-bordered table-responsive layanan">
+                      <thead>
+                        <tr>
+                          <th> No </th>
+                          <th> Tanggal </th>
+                          <th> Layanan </th>
+                          <th> Pelanggan </th>
+                          <th> Status Pembayaran </th>
+                          <th> Keterangan </th>
+                          <th> Bukti Bayar </th>
+                          <th> Harga </th>
+                          <th> Status Progress </th>
+                          <th> Grommer </th>
+                          <th> Check In </th>
+                          <th> Check Out </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!--  -->
+                      <?php
+                      $no = 1;
+                      foreach(DB::query("SELECT * FROM tbl_pemesanan WHERE id_pelanggan = %i",$_SESSION['nama']) as $pesanan){
+                        echo"
+                        <tr>
+                          <td>".$no++."</td>
+                          <td> {$pesanan['tanggal']} </td>
+                          <td> {$pesanan['id_layanan']} </td>
+                          <td> {$pesanan['id_pelanggan']} </td>
+                          <td> {$pesanan['status']} </td>
+                          <td title=\"$pesanan[keterangan]\"> ".substr($pesanan['keterangan'],0,50)." ... </td>
+                          <td> <img src=\"$pesanan[gambar]\" class=\"img img-responsive\" alt=\"\"> </td>
+                          <td> ".number_format($pesanan['id_layanan'])." </td>
+                          <td> {$pesanan['status_progress']} </td>
+                          <td> {$pesanan['id_grommer']} </td>
+                          <td> {$pesanan['checkin']} </td>
+                          <td> {$pesanan['checkout']} </td>
+                          
+                        </tr>";
+                      }
+                      ?>
+                        <!--  -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
                <!-- /col-md-6 -->
                <!-- image -->
-               <div class="col-md-3">
+               <!-- <div class="col-md-3">
                   <img src="img/pricing.png" alt="" class="center-block img-responsive">
-               </div>
+               </div> -->
                <!-- /col-md-3 -->
             </div>
             <!-- /row -->
-            <div class="price-table margin1">
-               <!-- Price table 1 -->
-               
-               <!-- /Price table 1 -->
-               <!-- Price table 2 -->
-               
-               <!-- /Price table 2 -->
-               <!-- Price table 3 -->
-               
-               <!-- /Price table 3 -->
-               <?php foreach (DB::query("SELECT * FROM tbl_layanan") as $layanan): ?>
-                  <div class="col-lg-3 col-md-6">
-                  <div class="plan">
-                     <!-- price table header -->
-                     <header>
-                        <i class="flaticon-dog"></i>
-                        <h5 class="plan-title">
-                        <?php echo $layanan['nama_layanan'] ?>
-                        </h5>
-                        <div class="plan-cost"><span class="plan-price">Rp. <?php echo number_format($layanan['harga']) ?></span></div>
-                     </header>
-                     <!-- plan features -->
-                     <ul class="plan-features">
-                     <?php echo $layanan['keterangan'] ?>
-                     </ul>
-                     <!-- /plan features -->
-                     <!-- button -->
-                     <div class="text-center">
-                        <a class="btn" href="order.php">Order</a>
-                     </div>
-                     <!-- /text-center -->
-                  </div>
-               </div>
-                  <?php endforeach ?>
-               <!-- Price table 4 -->
-               
-               
-               <!-- /Price table 4 -->
-            </div>
+            
             <!-- /Price tables  ends -->
          </div>
          <!-- /container-->

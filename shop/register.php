@@ -31,7 +31,7 @@
             <div class="col-lg-4 mx-auto">
               <h2 class="text-center mb-4">REGISTRASI USER</h2>
               <div class="auto-form-wrapper">
-                <form method="POST" action="slave/slave_register.php?proses=insert">
+                <form method="POST" action="../slave/slave_register.php?proses=insert">
                   <div class="form-group">
                       <div class="input-group">
                       <input type="text" name="nama" class="form-control" placeholder="Nama">
