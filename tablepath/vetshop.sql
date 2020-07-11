@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2020 at 06:22 AM
+-- Generation Time: Jul 11, 2020 at 06:49 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -133,7 +133,8 @@ INSERT INTO `tbl_pelanggan` (`id_pelanggan`, `nama`, `alamat`, `notelp`, `email`
 (6, 'Wisnu', 'Jalan Kelana', '081222', 'budi@mail.com', '12345'),
 (7, 'Anjani', 'Klaten', '08122222', 'anjani@mail.com', '12345'),
 (8, 'adinda', 'cilacap', '09282828', 'adin@mail.com', '12345'),
-(9, 'pras', 'mudi', '08122', 'mail@mail.com', '12345');
+(9, 'pras', 'mudi', '08122', 'mail@mail.com', '12345'),
+(10, '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -255,7 +256,7 @@ ALTER TABLE `tbl_layanan`
 -- AUTO_INCREMENT for table `tbl_pelanggan`
 --
 ALTER TABLE `tbl_pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_pemesanan`
