@@ -83,8 +83,8 @@
                             <div class="col-sm-6">
                               <select name="status" class="form-control">
                               <option value="">-Pilih Status Pembayaran-</option>
-                              <option value="Belum Bayar"> Belum Bayar </option>
-                              <option value="Sudah Bayar"> Sudah Bayar </option>
+                              <option value="0"> Meneunggu Pembayaran </option>
+                              <option value="1"> Lunas </option>
                               </select>
                             </div>
                           </div>
@@ -112,12 +112,12 @@
                               </select>
                             </div>
                           </div>
-                          <div class="form-group row">
+                          <!-- <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Bukti Pembayaran</label>
                               <div class="col-sm-6">
                               <input type="file" name="gambar" class="form-control">
                             </div>
-                          </div>
+                          </div> -->
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Status Progress</label>
                             <div class="col-sm-6">
@@ -196,23 +196,27 @@
                         <!--  -->
                       <?php
                       $no = 1;
-                      foreach(DB::query("SELECT * FROM tbl_pemesanan") as $pesanan){
+                      foreach(DB::query("SELECT a.*,p.nama,c.nama_layanan FROM tbl_pemesanan a JOIN tbl_pelanggan p ON p.id_pelanggan = a.id_pelanggan JOIN tbl_layanan c ON  c.id_layanan = a.id_layanan") as $pesanan){
+                        $status = "Menunggu pembayaran";
+                        if($pesanan['status'] == 1){
+                          $status = "Lunas";
+                        }
                         echo"
                         <tr>
                           <td>".$no++."</td>
                           <td> {$pesanan['tanggal']} </td>
-                          <td> {$pesanan['id_layanan']} </td>
-                          <td> {$pesanan['id_pelanggan']} </td>
-                          <td> {$pesanan['status']} </td>
+                          <td> {$pesanan['nama_layanan']} </td>
+                          <td> {$pesanan['nama']} </td>
+                          <td> {$status} </td>
                           <td title=\"$pesanan[keterangan]\"> ".substr($pesanan['keterangan'],0,50)." ... </td>
-                          <td> <img src=\"$pesanan[gambar]\" class=\"img img-responsive\" alt=\"\"> </td>
-                          <td> ".number_format($pesanan['id_layanan'])." </td>
+                          <td> <img src=\"$pesanan[bukti_pembayaran]\" class=\"img img-responsive\" alt=\"\"> </td>
+                          <td> ".number_format(harga($pesanan['id_pemesanan']))." </td>
                           <td> {$pesanan['status_progress']} </td>
                           <td> {$pesanan['id_grommer']} </td>
                           <td> {$pesanan['checkin']} </td>
                           <td> {$pesanan['checkout']} </td>
                           <td> 
-                            <button type=\"button\" onclick=\"pesanan_edit('$pesanan[id_pemesanan]')\" class=\"btn btn-outline-warning\">Edit</button>
+                            <button type=\"button\" onclick=\"pesanan_edit('$pesanan[id_pemesanan]')\" class=\"btn btn-outline-primary\">Action</button>
                             <button type=\"button\" onclick=\"pesanan_delete('$pesanan[id_pemesanan]')\" class=\"btn btn-outline-danger\">Hapus</button>
                           </td>
                         </tr>";
@@ -257,10 +261,11 @@
               success: function (json) {
                 $('input[name=id_pemesanan]').val(json.id_pemesanan);
                 $('input[name=tanggal]').val(json.tanggal);
-                $('input[name=id_pelanggan]').val(json.id_pelanggan);
-                $('input[name=status]').val(json.status);
+                $('select[name=id_layanan]').val(json.id_layanan);
+                $('select[name=id_pelanggan]').val(json.id_pelanggan);
+                $('select[name=status]').val(json.status);
                 $('input[name=jenis_hewan]').val(json.jenis_hewan);
-                $('input[name=keterangan]').html(json.keterangan);
+                $('textarea[name=keterangan]').html(json.keterangan);
                 $('input[name=status_progress]').val(json.status_progress);
                 $('input[name=id_grommer]').val(json.id_grommer);
                 $('input[name=checkin]').val(json.checkin);
