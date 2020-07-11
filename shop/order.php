@@ -73,6 +73,18 @@ include 'sess_cust.php';
             <div class="collapse navbar-collapse" id="navbar-brand-centered">
                <ul class="nav navbar-nav">
                   <li><a href="index.php">Home</a></li>
+                  <li><a href="history.php">Riwayat Order</a></li>
+               </ul>
+               <ul class="nav navbar-nav navbar-right">
+                  <!-- <li><a href="gallery.html">Gallery</a></li>
+                  <li class="dropdown">
+                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Blog<b class="caret"></b></a>
+                     <ul class="dropdown-menu">
+                        <li><a href="blog.html">Blog Home</a></li>
+                        <li><a href="blog-single.html">Blog Post</a></li>
+                     </ul>
+                  </li> -->
+                  <li><a href="logout.php">Logout</a></li>
                </ul>
               
             </div>
