@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2020 at 06:49 AM
+-- Generation Time: Jul 11, 2020 at 06:52 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -82,9 +82,16 @@ INSERT INTO `tbl_grommer` (`id_grommer`, `nama`, `status`) VALUES
 
 CREATE TABLE `tbl_kandang` (
   `id_kandang` int(11) NOT NULL,
-  `nama_kadang` varchar(50) NOT NULL,
+  `nama_kandang` varchar(50) NOT NULL,
   `status` enum('0','1') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_kandang`
+--
+
+INSERT INTO `tbl_kandang` (`id_kandang`, `nama_kandang`, `status`) VALUES
+(1, 'Kandang singa', '0');
 
 -- --------------------------------------------------------
 
@@ -244,7 +251,7 @@ ALTER TABLE `tbl_grommer`
 -- AUTO_INCREMENT for table `tbl_kandang`
 --
 ALTER TABLE `tbl_kandang`
-  MODIFY `id_kandang` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kandang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_layanan`
