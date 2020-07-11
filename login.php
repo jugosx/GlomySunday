@@ -64,7 +64,7 @@
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary submit-btn btn-block">Login</button>
-                    <button class="btn btn-info submit-btn btn-block">Daftar</button>
+                    <a class="btn btn-info submit-btn btn-block" href="register.php">Daftar</a>
                   </div>
                   <div class="form-group d-flex justify-content-between">
                     <div class="form-check form-check-flat mt-0">
