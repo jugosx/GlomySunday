@@ -34,6 +34,7 @@ switch($proses){
     break;
     case 'get':
         $data = DB::queryFirstRow("SELECT * FROM tbl_pemesanan WHERE id_pemesanan = %i",$_REQUEST['id']);
+        $data['harga'] = harga($data['id_pemesanan']);
         echo json_encode($data);
     break;
     case 'update':

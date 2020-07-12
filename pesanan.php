@@ -44,11 +44,11 @@
                           </div>
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanggal</label>
-                            <div class="col-sm-6 gj-datepicker gj-datepicker-bootstrap gj-unselectable input-group">
-                              <input name="tanggal" type="datetime-local" class="form-control" id="datepicker" width="276" placeholder="dd/mm/yyyy" /> <script>
-                                    $('#datepicker').datepicker({
-                                        uiLibrary: 'bootstrap4'
-                                    });
+                            <div class="col-sm-6 input-group">
+                              <input name="tanggal" type="date" class="form-control" width="276" placeholder="dd/mm/yyyy" /> <script>
+                                    // $('#datepicker').datepicker({
+                                    //     uiLibrary: 'bootstrap4'
+                                    // });
                                 </script>
                             </div>
                           </div>
@@ -103,13 +103,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Harga</label>
                             <div class="col-sm-6">
-                              <select name="harga" class="form-control">
-                               <?php
-                                  foreach(DB::query("SELECT id_layanan,nama_layanan,harga FROM tbl_layanan") as $layanan){
-                                    echo "<option value=\"$layanan[id_layanan]\">$layanan[nama_layanan] Rp. ".number_format($layanan['harga'])."</option>";
-                                  }
-                               ?>
-                              </select>
+                            <input name ="harga" type="number" class="form-control" placeholder="Hewan">
                             </div>
                           </div>
                           <!-- <div class="form-group row">
@@ -248,7 +242,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Kie diisi apa cuy
+                    <!-- Kie diisi apa cuy -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -265,8 +259,8 @@
               data: {id:id},
               dataType: "JSON",
               success: function (json) {
-                $('#tanggal').val(json.tanggal);
-                console.log(json.tanggal);
+                $('input[name=tanggal]').val(json.tanggal);
+                console.log(datetodatepicker(json.tanggal));
                 $('input[name=id_pemesanan]').val(json.id_pemesanan);
                 $('input[name=tanggal]').val(json.tanggal);
                 $('select[name=id_layanan]').val(json.id_layanan);
@@ -278,7 +272,7 @@
                 $('input[name=id_grommer]').val(json.id_grommer);
                 $('input[name=checkin]').val(json.checkin);
                 $('input[name=checkout]').val(json.checkout);
-                // $('input[name=harga]').val(json.harga);
+                $('input[name=harga]').val(json.harga);
                 // $('textarea[name=keterangan]').html(json.keterangan);
                 $("#form").attr('action', 'slave/pesanan_crud.php?proses=update');
                 $('html, body').animate({
@@ -305,5 +299,15 @@
                 
               }
             });
+          }
+
+          function datetodatepicker($date){
+            $date = $date.split(" ");
+            $date = $date[0];
+            $date = $date.split("-");
+            
+            return $date[0] + '-' + $date[1] + '-' + $date[2]
+
+
           }
           </script>
