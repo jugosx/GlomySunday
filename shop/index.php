@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php include_once '../config/connection.php'; ?>
+<?php include_once '../config/connection.php'; session_start()?>
 <html>
    <head>
       <meta charset="utf-8">
@@ -62,7 +62,11 @@
             <div class="collapse navbar-collapse" id="navbar-brand-centered">
                <ul class="nav navbar-nav">
                   <li class="active"><a href="">Home</a></li>
-                  <li><a href="history.php">Riwayat Order</a></li>
+                  <?php
+                     if(@$_SESSION['status'] == 'login'){
+                        echo "<li><a href=\"history.php\">Riwayat Order</a></li>";
+                     }
+                  ?>
                </ul>
                <ul class="nav navbar-nav navbar-right">
                   <!-- <li><a href="gallery.html">Gallery</a></li>
@@ -73,7 +77,13 @@
                         <li><a href="blog-single.html">Blog Post</a></li>
                      </ul>
                   </li> -->
-                  <li><a href="logout.php">Logout</a></li>
+                  <?php
+                     if(@$_SESSION['status'] == 'login'){
+                        echo "<li><a href=\"logout.php\">Logout</a></li>";
+                     }else{
+                        echo "<li><a href=\"login_cust.php\">Login</a></li>";
+                     }
+                  ?>
                </ul>
             </div>
             <!-- /.navbar-collapse -->

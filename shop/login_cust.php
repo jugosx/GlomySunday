@@ -68,8 +68,12 @@
                   </div>
                   <div class="form-group d-flex justify-content-between">
                     <div class="form-check form-check-flat mt-0">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" checked> Keep me signed in </label>
+                      <!-- <label class="form-check-label"> -->
+                        <!-- <input type="checkbox" class="form-check-input" checked> Keep me signed in </label> -->
+                    </div>
+                    <div class="form-check form-check-flat mt-0">
+                      <label class="form-check-home">
+                        <a class="btn btn-primary" href="index.php">Back to Website</a>
                     </div>
                   </div>
                 </form>

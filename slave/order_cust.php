@@ -4,6 +4,19 @@ require '../config/connection.php';
 $proses = $_GET['proses'];
 switch($proses){
     case 'insert':
+        //jika penitipan maka cek kandang
+        if(!empty($_POST['checkin'])){
+            if(!cekKandang()){ //cek kandang ada engga nih guys?
+                //kalo engga ada maka memberi tahu pesanan belum tersedia
+                header('location:../shop/order.php?error=Kandang tidak tersedia');
+            }
+        }else{
+            //cek yang groomer ada atau engga ini guys
+            if(!cekGrommer()){ //cek kandang ada engga nih guys?
+                //kalo engga ada maka memberi tahu pesanan belum tersedia
+                header('location:../shop/order.php?error=Grommer tidak tersedia');
+            }
+        }
         $data = [
             'tanggal'  => date('Y-m-d'),
             'id_pelanggan'    => $_SESSION['id_pel'],
@@ -13,7 +26,7 @@ switch($proses){
             'keterangan'         => $_POST['keterangan'],
             'id_grommer'         => $_POST['id_grommer'],
             'checkin'           => date_format(date_create($_POST['checking']),'Y-m-d'),
-            'checkout'           => date_format(date_create($_POST['checkoutg']),'Y-m-d')
+            'checkout'           => date_format(date_create($_POST['checkout']),'Y-m-d')
         ];
         $save = DB::insert('tbl_pemesanan',$data);
         if(!$save){
@@ -65,4 +78,22 @@ switch($proses){
             header('location:../pesanan.php?error');
         }
     break;
+}
+
+//cek kandang kosong atau tidak
+function cekKandang(){
+    $kandang = DB::queryFirstField("SELECT COUNT(*) FROM tbl_kandang WHERE status = 0"); //output count kandang yang tersedia atau dengan status 0
+    return false; //kandang tidak tersedia
+    if($kandang > 0){
+        return true; //kandang tersedia
+    }
+}
+
+//cek groomer selo atau tidak
+function cekGrommer(){
+    $grommer = DB::queryFirstField("SELECT COUNT(*) FROM tbl_grommer WHERE status = 'selo'"); //output count grommer yang tersedia atau dengan status 0
+    return false; //grommer tidak tersedia
+    if($grommer > 0){
+        return true; //grommer tersedia
+    }
 }

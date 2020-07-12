@@ -163,7 +163,7 @@
                             </div>
                           </div>
                           <button type="submit" class="btn btn-success mr-2">Simpan</button>
-                          <button class="btn btn-light">Batal</button>
+                          <a href="pesanan.php" class="btn btn-light">Batal</a>
                         </form>
                       </div>
                     </div>
@@ -186,7 +186,7 @@
                           <th> Bukti Bayar </th>
                           <th> Harga </th>
                           <th> Status Progress </th>
-                          <th> Grommer </th>
+                          <th> Grommer / Kandang </th>
                           <th> Check In </th>
                           <th> Check Out </th>
                           <th> Aksi </th>
@@ -196,25 +196,31 @@
                         <!--  -->
                       <?php
                       $no = 1;
-                      foreach(DB::query("SELECT a.*,p.nama,c.nama_layanan FROM tbl_pemesanan a JOIN tbl_pelanggan p ON p.id_pelanggan = a.id_pelanggan JOIN tbl_layanan c ON  c.id_layanan = a.id_layanan") as $pesanan){
+                      foreach(DB::query("SELECT a.*,p.nama,c.nama_layanan ,g.nama as grommer, nama_kandang FROM tbl_pemesanan a JOIN tbl_pelanggan p ON p.id_pelanggan = a.id_pelanggan JOIN tbl_layanan c ON  c.id_layanan = a.id_layanan LEFT JOIN tbl_grommer g ON g.id_grommer = a.id_grommer LEFT JOIN tbl_kandang k ON k.id_kandang = a.id_kandang") as $pesanan){
                         $status = "Menunggu pembayaran";
                         if($pesanan['status'] == 1){
                           $status = "Lunas";
                         }
+
+                        $addon = $pesanan['nama_kandang'];
+
+                        if($pesanan['grommer'] != ''){
+                          $addon = $pesanan['grommer'];
+                        }
                         echo"
                         <tr>
                           <td>".$no++."</td>
-                          <td> {$pesanan['tanggal']} </td>
+                          <td> ".tanggalDMY($pesanan['tanggal'])." </td>
                           <td> {$pesanan['nama_layanan']} </td>
                           <td> {$pesanan['nama']} </td>
                           <td> {$status} </td>
                           <td title=\"$pesanan[keterangan]\"> ".substr($pesanan['keterangan'],0,50)." ... </td>
-                          <td> <img src=\"$pesanan[gambar]\" class=\"img img-responsive\" alt=\"\"> </td>
+                          <td> <img src=\"$pesanan[bukti_pembayaran]\" class=\"img img-responsive\" alt=\"\"> </td>
                           <td> ".number_format(harga($pesanan['id_pemesanan']))." </td>
                           <td> {$pesanan['status_progress']} </td>
-                          <td> {$pesanan['id_grommer']} </td>
-                          <td> {$pesanan['checkin']} </td>
-                          <td> {$pesanan['checkout']} </td>
+                          <td> $addon </td>
+                          <td> ".tanggalDMY($pesanan['checkin'])." </td>
+                          <td> ".tanggalDMY($pesanan['checkout'])." </td>
                           <td> 
                             <button type=\"button\" onclick=\"pesanan_edit('$pesanan[id_pemesanan]')\" class=\"btn btn-outline-primary\">Action</button>
                             <button type=\"button\" onclick=\"pesanan_delete('$pesanan[id_pemesanan]')\" class=\"btn btn-outline-danger\">Hapus</button>
@@ -259,6 +265,8 @@
               data: {id:id},
               dataType: "JSON",
               success: function (json) {
+                $('#tanggal').val(json.tanggal);
+                console.log(json.tanggal);
                 $('input[name=id_pemesanan]').val(json.id_pemesanan);
                 $('input[name=tanggal]').val(json.tanggal);
                 $('select[name=id_layanan]').val(json.id_layanan);

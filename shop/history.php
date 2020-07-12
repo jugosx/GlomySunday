@@ -119,6 +119,7 @@ require 'sess_cust.php';
                         <!--  -->
                       <?php
                       $no = 1;
+                      //get data from table pemesanan
                       foreach(DB::query("SELECT tbl_pemesanan.*, nama_layanan FROM tbl_pemesanan LEFT JOIN tbl_layanan ON tbl_layanan.id_layanan=tbl_pemesanan.id_layanan WHERE id_pelanggan = %i",$_SESSION['id_pel']) as $pesanan){
                         $status = "Menunggu Pembayaran"; 
                         if($pesanan['status'] == 1){
@@ -130,13 +131,13 @@ require 'sess_cust.php';
                           <td>".date_format(date_create($pesanan['tanggal']),'d-m-Y')."</td>
                           <td> {$pesanan['nama_layanan']} </td>
                           <td> {$status} </td>
-                          <td title=\"$pesanan[keterangan]\"> ".substr($pesanan['keterangan'],0,50)." ... </td>
+                          <td title=\"$pesanan[keterangan]\"> ".substr($pesanan['keterangan'],0,50)." </td>
                           <td> <img src=\"$pesanan[bukti_pembayaran]\" class=\"img img-responsive\" alt=\"\"> </td>
                           <td> ".number_format(harga($pesanan['id_pemesanan']))." </td>
                           <td> {$pesanan['status_progress']} </td>
                           <td> {$pesanan['id_grommer']} </td>
-                          <td> {$pesanan['checkin']} </td>
-                          <td> {$pesanan['checkout']} </td>
+                          <td> ".tanggalDMY($pesanan['checkin'])." </td>
+                          <td> ".tanggalDMY($pesanan['checkout'])." </td>
                           
                         </tr>";
                       }

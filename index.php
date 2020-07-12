@@ -2,6 +2,5 @@
 session_start();
 if($_SESSION['status'] != "login"){
     header('location:login.php');
-}else{
-    require 'dashboard.php';
 }
+header('location:dashboard.php');
