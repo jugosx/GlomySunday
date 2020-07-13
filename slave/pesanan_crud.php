@@ -4,10 +4,10 @@ $proses = $_GET['proses'];
 switch($proses){
     case 'insert':
         $gambar = "";
-        if($_FILES['bukti_pembayaran']['size'] > 0){
+        if($_FILES['gambar']['size'] > 0){
             $path = '../gambar/';
-            $save_path = $path.$_FILES['bukti_pembayaran']['name'].date('YmdHis');
-            if(move_uploaded_file($_FILES['bukti_pembayaran']['tmp_name'],$save_path)){
+            $save_path = $path.$_FILES['gambar']['name'].date('YmdHis');
+            if(move_uploaded_file($_FILES['gambar']['tmp_name'],$save_path)){
                 $gambar = $save_path;
             }else{
                 header('location:../pesanan.php?error');
@@ -24,7 +24,7 @@ switch($proses){
             'id_grommer'         => $_POST['id_grommer'],
             'checkin'         => $_POST['checkin'],
             'checkout'         => $_POST['checkout'],
-            'bukti_pembayaran'        => str_replace('../','',$gambar)
+            'gambar'        => str_replace('../','',$gambar)
         ];
         $save = DB::insert('tbl_pemesanan',$data);
         if(!$save){
@@ -39,12 +39,12 @@ switch($proses){
     break;
     case 'update':
         $gambar = "";
-        if($_FILES['bukti_pembayaran']['size'] > 0){
+        if($_FILES['gambar']['size'] > 0){
             $path = "../gambar/".date('YmdHis');
-            $save_path = $path.$_FILES['bukti_pembayaran']['name'];
-            if(move_uploaded_file($_FILES['bukti_pembayaran']['tmp_name'],$save_path)){
+            $save_path = $path.$_FILES['gambar']['name'];
+            if(move_uploaded_file($_FILES['gambar']['tmp_name'],$save_path)){
                 $gambar = $save_path;
-                $last_gambar = DB::queryFirstRow("SELECT bukti_pembayaran FROM tbl_pemesanan WHERE id_pemesanan = %i",$_POST['id_pemesanan']);
+                $last_gambar = DB::queryFirstRow("SELECT gambar FROM tbl_pemesanan WHERE id_pemesanan = %i",$_POST['id_pemesanan']);
                 unlink($last_gambar);
             }else{
                 header('location:../pesanan.php?error');
@@ -61,7 +61,7 @@ switch($proses){
             'id_grommer'         => $_POST['id_grommer'],
             'checkin'         => $_POST['checkin'],
             'checkout'         => $_POST['checkout'],
-            'bukti_pembayaran'        => str_replace('../','',$gambar)
+            'gambar'        => str_replace('../','',$gambar)
         ];
         $save = DB::update('tbl_pemesanan',$data,"id_pemesanan=%i",$_POST['id_pemesanan']);
         if(!$save){

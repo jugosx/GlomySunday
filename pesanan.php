@@ -45,7 +45,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tanggal</label>
                             <div class="col-sm-6 input-group">
-                              <input name="tanggal" type="date" class="form-control" width="276" placeholder="dd/mm/yyyy" /> <script>
+                              <input name="tanggal" type="date" disabled class="form-control" width="276" placeholder="dd/mm/yyyy" /> <script>
                                     // $('#datepicker').datepicker({
                                     //     uiLibrary: 'bootstrap4'
                                     // });
@@ -55,7 +55,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Kategori Layanan</label>
                             <div class="col-sm-6">
-                              <select name="id_layanan" class="form-control">
+                              <select disabled name="id_layanan" class="form-control">
                                <option value="">-Pilih Layanan-</option>
                                <?php
                                   foreach(DB::query("SELECT id_layanan,nama_layanan FROM tbl_layanan") as $layanan){
@@ -68,7 +68,7 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nama Pelanggan</label>
                             <div class="col-sm-6">
-                              <select name="id_pelanggan" class="form-control">
+                              <select disabled name="id_pelanggan" class="form-control">
                               <option value="">-Pilih Pelanggan-</option>
                                <?php
                                   foreach(DB::query("SELECT id_pelanggan,nama FROM tbl_pelanggan") as $pel){
@@ -103,15 +103,15 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Harga</label>
                             <div class="col-sm-6">
-                            <input name ="harga" type="number" class="form-control" placeholder="10.000">
+                            <input disabled name ="harga" type="number" class="form-control" placeholder="10.000">
                             </div>
                           </div>
-                          <div class="form-group row">
+                          <!-- <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Bukti Pembayaran</label>
                               <div class="col-sm-6">
                               <input type="file" name="bukti_pembayaran" class="form-control">
                             </div>
-                          </div>
+                          </div> -->
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Status Progress</label>
                             <div class="col-sm-6">
@@ -123,39 +123,46 @@
                               </select>
                             </div>
                           </div>
-                          <div class="form-group row">
+                          <div class="form-group row grommer" style="display:none">
                             <label class="col-sm-3 col-form-label">Grommer</label>
                             <div class="col-sm-6">
                               <select name="id_grommer" class="form-control">
                               <option value="">-Pilih Grommer-</option>
                               <?php
-                                  foreach(DB::query("SELECT id_grommer,nama FROM tbl_grommer") as $grommer){
+                                  foreach(DB::query("SELECT id_grommer,nama FROM tbl_grommer WHERE status = 'selo'") as $grommer){
                                     echo "<option value=\"$grommer[id_grommer]\">$grommer[nama]</option>";
                                   }
                                ?>
                               </select>
                             </div>
                           </div>
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Check In</label>
-                            <div class="col-sm-6 gj-datepicker gj-datepicker-bootstrap gj-unselectable input-group">
-                              <input name="checkin" type="datetime-local" class="form-control" id="datepicker" width="276" placeholder="dd/mm/yyyy" /> <script>
-                                    $('#datepicker').datepicker({
-                                        uiLibrary: 'bootstrap4'
-                                    });
-                                </script>
+                          <div class="form-group row penitipan" style="display:none">
+                            <label class="col-sm-3 col-form-label">Kandang</label>
+                            <div class="col-sm-6">
+                              <select name="id_grommer" class="form-control">
+                              <option value="">-Pilih Kandang-</option>
+                              <?php
+                                  foreach(DB::query("SELECT id_kandang,nama_kandang FROM tbl_kandang WHERE status = 0") as $kandang){
+                                    echo "<option value=\"$kandang[id_grommer]\">$kandang[nama_kandang]</option>";
+                                  }
+                               ?>
+                              </select>
                             </div>
                           </div>
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Check Out</label>
-                            <div class="col-sm-6 gj-datepicker gj-datepicker-bootstrap gj-unselectable input-group">
-                              <input name="checkout" type="datetime-local" class="form-control" id="datepicker" width="276" placeholder="dd/mm/yyyy" /> <script>
-                                    $('#datepicker').datepicker({
-                                        uiLibrary: 'bootstrap4'
-                                    });
-                                </script>
+                          <div class="penitipan" style="display:none">
+                            <!-- <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Check In</label>
+                              <div class="col-sm-6 input-group">
+                                <input name="checkin" type="date" class="form-control" id="checkin" width="276" placeholder="dd/mm/yyyy" />
+                              </div>
                             </div>
-                          </div>
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Check Out</label>
+                              <div class="col-sm-6 input-group">
+                                <input name="checkout" type="date" class="form-control" id="checkout" width="276" placeholder="dd/mm/yyyy" />
+                              </div>
+                            </div>
+                          </div> -->
                           <button type="submit" class="btn btn-success mr-2">Simpan</button>
                           <a href="pesanan.php" class="btn btn-light">Batal</a>
                         </form>
