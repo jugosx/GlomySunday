@@ -161,8 +161,8 @@
                               <div class="col-sm-6 input-group">
                                 <input name="checkout" type="date" class="form-control" id="checkout" width="276" placeholder="dd/mm/yyyy" />
                               </div>
-                            </div>
-                          </div> -->
+                            </div> -->
+                          </div>
                           <button type="submit" class="btn btn-success mr-2">Simpan</button>
                           <a href="pesanan.php" class="btn btn-light">Batal</a>
                         </form>
