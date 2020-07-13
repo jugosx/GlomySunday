@@ -33,7 +33,7 @@ switch($proses){
         header('location:../pesanan.php?success');
     break;
     case 'get':
-        $data = DB::queryFirstRow("SELECT * FROM tbl_pemesanan WHERE id_pemesanan = %i",$_REQUEST['id']);
+        $data = DB::queryFirstRow("SELECT a.*,b.nama_layanan FROM tbl_pemesanan a JOIN tbl_layanan b ON b.id_layanan = a.id_layanan WHERE a.id_pemesanan = %i",$_REQUEST['id']);
         $data['harga'] = harga($data['id_pemesanan']);
         echo json_encode($data);
     break;

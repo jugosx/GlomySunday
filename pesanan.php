@@ -139,11 +139,11 @@
                           <div class="form-group row penitipan" style="display:none">
                             <label class="col-sm-3 col-form-label">Kandang</label>
                             <div class="col-sm-6">
-                              <select name="id_grommer" class="form-control">
+                              <select name="id_kandang" class="form-control">
                               <option value="">-Pilih Kandang-</option>
                               <?php
-                                  foreach(DB::query("SELECT id_kandang,nama_kandang FROM tbl_kandang WHERE status = 0") as $kandang){
-                                    echo "<option value=\"$kandang[id_grommer]\">$kandang[nama_kandang]</option>";
+                                  foreach(DB::query("SELECT id_kandang,nama_kandang FROM tbl_kandang WHERE status = '0'") as $kandang){
+                                    echo "<option value=\"$kandang[id_kandang]\">$kandang[nama_kandang]</option>";
                                   }
                                ?>
                               </select>
@@ -266,6 +266,14 @@
               data: {id:id},
               dataType: "JSON",
               success: function (json) {
+                tipe = json.nama_layanan;
+                if(tipe.includes("Penitipan")){
+                    $(".penitipan").show();
+                    $(".grommer").hide();
+                }else{
+                  $(".penitipan").hide();
+                    $(".grommer").show();
+                }
                 $('input[name=tanggal]').val(json.tanggal);
                 console.log(datetodatepicker(json.tanggal));
                 $('input[name=id_pemesanan]').val(json.id_pemesanan);
