@@ -4,10 +4,10 @@ $proses = $_GET['proses'];
 switch($proses){
     case 'insert':
         $gambar = "";
-        if($_FILES['gambar']['size'] > 0){
+        if($_FILES['bukti_pembayaran']['size'] > 0){
             $path = '../gambar/';
-            $save_path = $path.$_FILES['gambar']['name'].date('YmdHis');
-            if(move_uploaded_file($_FILES['gambar']['tmp_name'],$save_path)){
+            $save_path = $path.$_FILES['bukti_pembayaran']['name'].date('YmdHis');
+            if(move_uploaded_file($_FILES['bukti_pembayaran']['tmp_name'],$save_path)){
                 $gambar = $save_path;
             }else{
                 header('location:../pesanan.php?error');

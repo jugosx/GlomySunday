@@ -103,15 +103,15 @@
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Harga</label>
                             <div class="col-sm-6">
-                            <input name ="harga" type="number" class="form-control" placeholder="Hewan">
+                            <input name ="harga" type="number" class="form-control" placeholder="10.000">
                             </div>
                           </div>
-                          <!-- <div class="form-group row">
+                          <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Bukti Pembayaran</label>
                               <div class="col-sm-6">
-                              <input type="file" name="gambar" class="form-control">
+                              <input type="file" name="bukti_pembayaran" class="form-control">
                             </div>
-                          </div> -->
+                          </div>
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Status Progress</label>
                             <div class="col-sm-6">
