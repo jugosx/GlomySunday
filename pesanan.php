@@ -39,7 +39,7 @@
                           <div class="form-group row">
                             <!-- <label class="col-sm-3 col-form-label">Id Pemesanan</label> -->
                             <div class="col-sm-6">
-                              <input type="hidden" class="form-control" placeholder="Enter ID Pesanan">
+                              <input type="hidden" name="id_pemesanan" class="form-control" value="">
                             </div>
                           </div>
                           <div class="form-group row">
@@ -266,6 +266,7 @@
               data: {id:id},
               dataType: "JSON",
               success: function (json) {
+                // $("#id_pemesanan").val(json.id_pemesanan);
                 tipe = json.nama_layanan;
                 if(tipe.includes("Penitipan")){
                     $(".penitipan").show();

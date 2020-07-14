@@ -128,7 +128,10 @@
                <!-- Price table 3 -->
                
                <!-- /Price table 3 -->
-               <?php foreach (DB::query("SELECT * FROM tbl_layanan") as $layanan): ?>
+               <?php 
+                  $tersedia['grommer'] = DB::queryFirstField("SELECT COUNT(*) FROM tbl_grommer WHERE status = 'selo'"); //cek grommer tersedia berapa
+                  $tersedia['kandang'] = DB::queryFirstField("SELECT COUNT(*) FROM tbl_kandang WHERE status = '0'"); //cek kandang tersedia berapa
+                  foreach (DB::query("SELECT * FROM tbl_layanan") as $layanan): ?>
                   <div class="col-lg-3 col-md-6">
                   <div class="plan">
                      <!-- price table header -->
@@ -140,13 +143,22 @@
                         <div class="plan-cost"><span class="plan-price">Rp. <?php echo number_format($layanan['harga']) ?></span></div>
                      </header>
                      <!-- plan features -->
+                     <h6 class="plan-title"><center>
+                        Tersedia : <?php
+                           if (strpos($layanan['nama_layanan'], 'penitipan') !== false) {
+                              echo $a = $tersedia['kandang'];
+                          }else{
+                             echo $a = $tersedia['grommer'];
+                          }
+                        ?>
+                     </center></h6>
                      <ul class="plan-features">
                      <?php echo $layanan['keterangan'] ?>
                      </ul>
                      <!-- /plan features -->
                      <!-- button -->
                      <div class="text-center">
-                        <a class="btn" href="order.php">Order</a>
+                        <a class="btn" <?php if($a == 0){ ?> onclick="alert('Layanan tidak tersedia saat ini')" <?php } else { echo " href=\"order.php\""; }  ?> >Order</a>
                      </div>
                      <!-- /text-center -->
                   </div>

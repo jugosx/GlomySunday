@@ -38,35 +38,28 @@ switch($proses){
         echo json_encode($data);
     break;
     case 'update':
-        $gambar = "";
-        if($_FILES['gambar']['size'] > 0){
-            $path = "../gambar/".date('YmdHis');
-            $save_path = $path.$_FILES['gambar']['name'];
-            if(move_uploaded_file($_FILES['gambar']['tmp_name'],$save_path)){
-                $gambar = $save_path;
-                $last_gambar = DB::queryFirstRow("SELECT gambar FROM tbl_pemesanan WHERE id_pemesanan = %i",$_POST['id_pemesanan']);
-                unlink($last_gambar);
-            }else{
-                header('location:../pesanan.php?error');
-            }
-        }
-        $data = [
-            'tanggal'  => $_POST['tanggal'],
-            'id_pelanggan'    => $_POST['id_pelanggan'],
-            'id_layanan'         => $_POST['id_layanan'],
-            'status'         => $_POST['status'],
-            'jenis_hewan'         => $_POST['jenis_hewan'],
-            'keterangan'         => $_POST['keterangan'],
-            'status_progress'         => $_POST['status_progress'],
-            'id_grommer'         => $_POST['id_grommer'],
-            'checkin'         => $_POST['checkin'],
-            'checkout'         => $_POST['checkout'],
-            'gambar'        => str_replace('../','',$gambar)
-        ];
+        // print_r($_POST);die;
+        $data = $_POST;
+        // $data = [
+        //     'status'         => $_POST['status'],
+        //     'status_progress'         => $_POST['status_progress'],
+        //     'jenis_hewan'         => $_POST['jenis_hewan'],
+        //     'keterangan'         => $_POST['keterangan'],
+        //     'status_progress'         => $_POST['status_progress'],
+        //     'id_grommer'         => $_POST['id_grommer'],
+        //     'checkin'         => $_POST['checkin'],
+        //     'checkout'         => $_POST['checkout'],
+        //     'id_kandang'        => $_POST['id_kandang']
+        // ];
         $save = DB::update('tbl_pemesanan',$data,"id_pemesanan=%i",$_POST['id_pemesanan']);
         if(!$save){
-            unlink($gambar);
             header('location:../pesanan.php?error');
+        }
+        if($data['id_kandang'] != ''){
+            DB::update('tbl_kandang',['status' => '1'],"id_kandang=%s",$data['id_kandang']);
+        }
+        if($data['id_grommer'] != ''){
+            DB::update('tbl_grommer',['status' => 'kerja'],"id_grommer=%s",$data['id_grommer']);
         }
         header('location:../pesanan.php?success');
     break;
@@ -75,6 +68,24 @@ switch($proses){
             header('location:../pesanan.php?success');
         }else{
             header('location:../pesanan.php?error');
+        }
+    break;
+    case 'bukti_pembayaran':
+        $gambar = "";
+        if($_FILES['gambar']['size'] > 0){
+            $path = '../gambar/';
+            $save_path = $path.$_FILES['gambar']['name'].date('YmdHis');
+            if(move_uploaded_file($_FILES['gambar']['tmp_name'],$save_path)){
+                $gambar = $save_path;
+                $save = DB::update('tbl_pemesanan',['bukti_pembayaran' => $gambar],'id_pemesanan=%i',$_POST['id_pemesanan']);
+                if($save){
+                    header('location:../shop/history.php?success');
+                }else{
+                    header('location:../shop/history.php?error');
+                }
+            }else{
+                header('location:../shop/history.php?error');
+            }
         }
     break;
 }

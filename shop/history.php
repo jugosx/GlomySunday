@@ -120,11 +120,23 @@ require 'sess_cust.php';
                       <?php
                       $no = 1;
                       //get data from table pemesanan
-                      foreach(DB::query("SELECT tbl_pemesanan.*, nama_layanan FROM tbl_pemesanan LEFT JOIN tbl_layanan ON tbl_layanan.id_layanan=tbl_pemesanan.id_layanan WHERE id_pelanggan = %i",$_SESSION['id_pel']) as $pesanan){
-                        $status = "Menunggu Pembayaran"; 
+                      foreach(DB::query("SELECT a.*,p.nama,c.nama_layanan ,g.nama as grommer, nama_kandang FROM tbl_pemesanan a JOIN tbl_pelanggan p ON p.id_pelanggan = a.id_pelanggan JOIN tbl_layanan c ON  c.id_layanan = a.id_layanan LEFT JOIN tbl_grommer g ON g.id_grommer = a.id_grommer LEFT JOIN tbl_kandang k ON k.id_kandang = a.id_kandang") as $pesanan){
+                        $status = "Menunggu pembayaran";
                         if($pesanan['status'] == 1){
-                           $status = "Lunas";
-                         }
+                          $status = "Lunas";
+                        }
+
+                        if($pesanan['bukti_pembayaran'] == ''){
+                           $pesanan['bukti_pembayaran'] = "<button onclick=\"sendid('$pesanan[id_pemesanan]')\" data-toggle=\"modal\" data-target=\"#exampleModal\" class=\"\">Upload Pembayaran </button>";
+                        }else{
+                           $pesanan['bukti_pembayaran'] = "<img style=\"max-width:35px\" src=\"$pesanan[bukti_pembayaran]\" class=\"img img-responsive\" alt=\"\">";
+                        }
+
+                        $addon = $pesanan['nama_kandang'];
+
+                        if($pesanan['grommer'] != ''){
+                          $addon = $pesanan['grommer'];
+                        }
                         echo"
                         <tr>
                           <td>".$no++."</td>
@@ -132,10 +144,10 @@ require 'sess_cust.php';
                           <td> {$pesanan['nama_layanan']} </td>
                           <td> {$status} </td>
                           <td title=\"$pesanan[keterangan]\"> ".substr($pesanan['keterangan'],0,50)." </td>
-                          <td> <img src=\"$pesanan[bukti_pembayaran]\" class=\"img img-responsive\" alt=\"\"> </td>
+                          <td> $pesanan[bukti_pembayaran] </td>
                           <td> ".number_format(harga($pesanan['id_pemesanan']))." </td>
                           <td> {$pesanan['status_progress']} </td>
-                          <td> {$pesanan['id_grommer']} </td>
+                          <td> {$addon} </td>
                           <td> ".tanggalDMY($pesanan['checkin'])." </td>
                           <td> ".tanggalDMY($pesanan['checkout'])." </td>
                           
@@ -163,6 +175,33 @@ require 'sess_cust.php';
          <!-- /container-->
       </section>
       <!-- /Section ends -->
+
+      <!-- Modal -->
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Upload Bukti Pembayaran</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <form action="../slave/pesanan_crud.php?proses=bukti_pembayaran" method="POST" enctype="multipart/form-data">
+            <div class="modal-body">
+                      <input type="hidden" name="id_pemesanan">
+                     <input type="file" name="gambar" id="">
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+            </div>
+         </div>
+      </div>
+      </div>
+      <!-- /Modal -->
+
       <!-- Footer -->		
       <footer>
          <!-- Contact info -->
@@ -218,7 +257,12 @@ require 'sess_cust.php';
 	<!-- UI jQuery (For Module #5 and #6) -->
 	<script src="../../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.js" type="text/javascript"></script>
 	<!-- All Scripts & Plugins -->
-	<script src="switcher/js/dmss.js"></script>		  
+	<script src="switcher/js/dmss.js"></script>
+   <script>
+   function sendid(id){
+      $("input[name=id_pemesanan]").val(id);
+   }
+   </script>
    </body>
 
 <!-- Mirrored from ingridkuhn.com/themes/petz/pricing.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Jul 2020 08:02:58 GMT -->

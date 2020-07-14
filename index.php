@@ -1,6 +1,7 @@
 <?php
 session_start();
 if($_SESSION['status'] != "login"){
-    header('location:login.php');
+    header('location:shop/index.php');
+}else{
+    header('location:dashboard.php');
 }
-header('location:dashboard.php');
