@@ -145,7 +145,7 @@
                      <!-- plan features -->
                      <h6 class="plan-title"><center>
                         Tersedia : <?php
-                           if (strpos($layanan['nama_layanan'], 'penitipan') !== false) {
+                           if (strpos($layanan['nama_layanan'], 'penitipan') === true) {
                               echo $a = $tersedia['kandang'];
                           }else{
                              echo $a = $tersedia['grommer'];
