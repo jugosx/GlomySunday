@@ -270,6 +270,8 @@ include 'sess_cust.php';
          
          if(tipe.includes("Penitipan")){
             $("#form-penitipan").show();
+         }else{
+            $("#form-penitipan").hide();
          }
 
          $("input[name=total_harga]").val(harga);

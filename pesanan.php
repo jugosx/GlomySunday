@@ -129,8 +129,12 @@
                               <select name="id_grommer" class="form-control">
                               <option value="">-Pilih Grommer-</option>
                               <?php
-                                  foreach(DB::query("SELECT id_grommer,nama FROM tbl_grommer WHERE status = 'selo'") as $grommer){
-                                    echo "<option value=\"$grommer[id_grommer]\">$grommer[nama]</option>";
+                                  foreach(DB::query("SELECT id_grommer,nama,status FROM tbl_grommer") as $grommer){
+                                    if($grommer['status'] == 'kerja'){
+                                      echo "<option status=\"$grommer[status]\" value=\"$grommer[id_grommer]\">$grommer[nama] (Sedang Kerja)</option>";
+                                    }else{
+                                      echo "<option status=\"$grommer[status]\" value=\"$grommer[id_grommer]\">$grommer[nama]</option>";
+                                    }
                                   }
                                ?>
                               </select>
@@ -142,8 +146,13 @@
                               <select name="id_kandang" class="form-control">
                               <option value="">-Pilih Kandang-</option>
                               <?php
-                                  foreach(DB::query("SELECT id_kandang,nama_kandang FROM tbl_kandang WHERE status = '0'") as $kandang){
-                                    echo "<option value=\"$kandang[id_kandang]\">$kandang[nama_kandang]</option>";
+                                  foreach(DB::query("SELECT id_kandang,nama_kandang,status FROM tbl_kandang") as $kandang){
+                                    if($kandang['status'] == '1'){
+                                      echo "<option status=\"$kandang[status]\" value=\"$kandang[id_kandang]\">$kandang[nama_kandang] (Terisi)</option>";
+                                    }else{
+                                      echo "<option status=\"$kandang[status]\" value=\"$kandang[id_kandang]\">$kandang[nama_kandang]</option>";
+                                    }
+                                    
                                   }
                                ?>
                               </select>
@@ -162,6 +171,12 @@
                                 <input name="checkout" type="date" class="form-control" id="checkout" width="276" placeholder="dd/mm/yyyy" />
                               </div>
                             </div> -->
+                          </div>
+                          <div class="form-group row denda">
+                            <label class="col-sm-3 col-form-label">Denda</label>
+                            <div class="col-sm-6">
+                            <input name="denda" type="number" class="form-control" placeholder="Denda">
+                            </div>
                           </div>
                           <button type="submit" class="btn btn-success mr-2">Simpan</button>
                           <a href="pesanan.php" class="btn btn-light">Batal</a>
@@ -189,6 +204,7 @@
                           <th> Keterangan </th>
                           <th> Bukti Bayar </th>
                           <th> Harga </th>
+                          <th> Denda </th>
                           <th> Status Progress </th>
                           <th> Grommer / Kandang </th>
                           <th> Check In </th>
@@ -221,6 +237,7 @@
                           <td title=\"$pesanan[keterangan]\"> ".substr($pesanan['keterangan'],0,50)." ... </td>
                           <td> <img src=\"$pesanan[bukti_pembayaran]\" class=\"img img-responsive\" alt=\"\"> </td>
                           <td> ".number_format(harga($pesanan['id_pemesanan']))." </td>
+                          <td> ".number_format($pesanan['denda'])." </td>
                           <td> {$pesanan['status_progress']} </td>
                           <td> $addon </td>
                           <td> ".tanggalDMY($pesanan['checkin'])." </td>
@@ -287,12 +304,14 @@
                 $('select[name=status]').val(json.status);
                 $('input[name=jenis_hewan]').val(json.jenis_hewan);
                 $('textarea[name=keterangan]').html(json.keterangan);
-                $('input[name=status_progress]').val(json.status_progress);
-                $('input[name=id_grommer]').val(json.id_grommer);
+                $('select[name=status_progress]').val(json.status_progress);
+                $('select[name=id_kandang]').val(json.id_kandang);
+                $('select[name=id_grommer]').val(json.id_grommer);
                 $('input[name=checkin]').val(json.checkin);
                 $('input[name=checkout]').val(json.checkout);
                 $('input[name=harga]').val(json.harga);
-                // $('textarea[name=keterangan]').html(json.keterangan);
+                $('input[name=denda]').val(json.denda);
+                // $('select[name=status]').html(json.status);
                 $("#form").attr('action', 'slave/pesanan_crud.php?proses=update');
                 $('html, body').animate({
                     scrollTop: $(".page-title").offset().top

@@ -57,9 +57,17 @@ switch($proses){
         }
         if($data['id_kandang'] != ''){
             DB::update('tbl_kandang',['status' => '1'],"id_kandang=%s",$data['id_kandang']);
+            if($data['status_progress'] == 'Selesai'){
+                DB::update('tbl_kandang',['status' => '0'],"id_kandang=%s",$data['id_kandang']);
+                DB::update('tbl_pemesanan',['id_kandang' => ''],"id_pemesanan=%i",$_POST['id_pemesanan']);
+            }
         }
         if($data['id_grommer'] != ''){
             DB::update('tbl_grommer',['status' => 'kerja'],"id_grommer=%s",$data['id_grommer']);
+            if($data['status_progress'] == 'Selesai'){
+                DB::update('tbl_grommer',['status' => 'selo'],"id_grommer=%s",$data['id_grommer']);
+                DB::update('tbl_pemesanan',['id_grommer' => ''],"id_pemesanan=%i",$_POST['id_pemesanan']);
+            }
         }
         header('location:../pesanan.php?success');
     break;

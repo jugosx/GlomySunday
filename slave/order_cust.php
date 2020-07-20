@@ -4,6 +4,7 @@ require '../config/connection.php';
 $proses = $_GET['proses'];
 switch($proses){
     case 'insert':
+        // echo $_POST['checkin'];die;
         //jika penitipan maka cek kandang
         if(!empty($_POST['checkin'])){
             if(!cekKandang()){ //cek kandang ada engga nih guys?
@@ -17,6 +18,7 @@ switch($proses){
                 header('location:../shop/order.php?error=Grommer tidak tersedia');
             }
         }
+        // echo $_POST['checking'];
         $data = [
             'tanggal'  => date('Y-m-d'),
             'id_pelanggan'    => $_SESSION['id_pel'],
@@ -25,9 +27,10 @@ switch($proses){
             'jenis_hewan'         => $_POST['jenis_hewan'],
             'keterangan'         => $_POST['keterangan'],
             'id_grommer'         => $_POST['id_grommer'],
-            'checkin'           => date_format(date_create($_POST['checking']),'Y-m-d'),
-            'checkout'           => date_format(date_create($_POST['checkout']),'Y-m-d')
+            'checkin'           => $_POST['checkin'],
+            'checkout'           => $_POST['checkout']
         ];
+        print_r($data);die();
         $save = DB::insert('tbl_pemesanan',$data);
         if(!$save){
             header('location:../shop/order.php?error');
@@ -83,17 +86,21 @@ switch($proses){
 //cek kandang kosong atau tidak
 function cekKandang(){
     $kandang = DB::queryFirstField("SELECT COUNT(*) FROM tbl_kandang WHERE status = 0"); //output count kandang yang tersedia atau dengan status 0
-    return false; //kandang tidak tersedia
+    
     if($kandang > 0){
         return true; //kandang tersedia
+    }else{
+        return false; //kandang tidak tersedia
     }
 }
 
 //cek groomer selo atau tidak
 function cekGrommer(){
     $grommer = DB::queryFirstField("SELECT COUNT(*) FROM tbl_grommer WHERE status = 'selo'"); //output count grommer yang tersedia atau dengan status 0
-    return false; //grommer tidak tersedia
+    
     if($grommer > 0){
         return true; //grommer tersedia
+    }else{
+        return false; //grommer tidak tersedia
     }
 }
