@@ -4,6 +4,7 @@
 	<title>Cetak Laporan Pemesanan</title>
 </head>
 <body>
+<?php require 'partials/style.css.php' ?>
 
 	<center>
 
@@ -20,19 +21,14 @@
 	?>
     <?php include_once 'config/connection.php'; ?>
 
-	<table class="table table-bordered table-responsive layanan">
+	<table class="table table-bordered layanan">
                       <thead>
                         <tr>
-                          <th> No </th>
                           <th> Tanggal </th>
                           <th> Layanan </th>
                           <th> Pelanggan </th>
                           <th> Status Pembayaran </th>
-                          <th> Keterangan </th>
-                          <th> Bukti Bayar </th>
                           <th> Harga </th>
-                          <th> Status Progress </th>
-                          <th> Grommer / Kandang </th>
                           <th> Check In </th>
                           <th> Check Out </th>
                         </tr>
@@ -54,16 +50,12 @@
                         }
                         echo"
                         <tr>
-                          <td>".$no++."</td>
                           <td> ".tanggalDMY($pesanan['tanggal'])." </td>
                           <td> {$pesanan['nama_layanan']} </td>
                           <td> {$pesanan['nama']} </td>
                           <td> {$status} </td>
-                          <td title=\"$pesanan[keterangan]\"> ".substr($pesanan['keterangan'],0,50)." ... </td>
-                          <td> <img src=\"$pesanan[bukti_pembayaran]\" class=\"img img-responsive\" alt=\"\"> </td>
                           <td> ".number_format(harga($pesanan['id_pemesanan']))." </td>
-                          <td> {$pesanan['status_progress']} </td>
-                          <td> $addon </td>
+                          
                           <td> ".tanggalDMY($pesanan['checkin'])." </td>
                           <td> ".tanggalDMY($pesanan['checkout'])." </td>
                          

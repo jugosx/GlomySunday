@@ -175,9 +175,11 @@
                   <div class="card-body">
                     <h4 class="card-title">Olah Data Pesanan</h4>
                     <p class="card-description"> Olah Data <code>.Pesanan</code> </p>
-                    <a href="cetak.php" target="_blank">CETAK</a>
+                    
+                    
                     <table class="table table-bordered table-responsive layanan">
                       <thead>
+                      <a class="btn btn-outline-primary" href="cetak.php" target="_blank">CETAK</a>
                         <tr>
                           <th> No </th>
                           <th> Tanggal </th>
