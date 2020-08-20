@@ -120,14 +120,14 @@ require 'sess_cust.php';
                       <?php
                       $no = 1;
                       //get data from table pemesanan
-                      foreach(DB::query("SELECT a.*,p.nama,c.nama_layanan ,g.nama as grommer, nama_kandang FROM tbl_pemesanan a JOIN tbl_pelanggan p ON p.id_pelanggan = a.id_pelanggan JOIN tbl_layanan c ON  c.id_layanan = a.id_layanan LEFT JOIN tbl_grommer g ON g.id_grommer = a.id_grommer LEFT JOIN tbl_kandang k ON k.id_kandang = a.id_kandang") as $pesanan){
+                      foreach(DB::query("SELECT a.*,p.nama,c.nama_layanan ,g.nama as grommer, nama_kandang FROM tbl_pemesanan a JOIN tbl_pelanggan p ON p.id_pelanggan = a.id_pelanggan JOIN tbl_layanan c ON  c.id_layanan = a.id_layanan LEFT JOIN tbl_grommer g ON g.id_grommer = a.id_grommer LEFT JOIN tbl_kandang k ON k.id_kandang = a.id_kandang WHERE a.id_pelanggan = '$_SESSION[id_pel]'") as $pesanan){
                         $status = "Menunggu pembayaran";
                         if($pesanan['status'] == 1){
                           $status = "Lunas";
                         }
 
                         if($pesanan['bukti_pembayaran'] == ''){
-                           $pesanan['bukti_pembayaran'] = "<button onclick=\"sendid('$pesanan[id_pemesanan]')\" data-toggle=\"modal\" data-target=\"#exampleModal\" class=\"\">Upload Pembayaran </button>";
+                           $pesanan['bukti_pembayaran'] = "<button onclick=\"sendid('$pesanan[id_pemesanan]','".harga($pesanan['id_pemesanan'])."')\" data-toggle=\"modal\" data-target=\"#exampleModal\" class=\"\">Pembayaran </button>";
                         }else{
                            $pesanan['bukti_pembayaran'] = "<img style=\"max-width:35px\" src=\"$pesanan[bukti_pembayaran]\" class=\"img img-responsive\" alt=\"\">";
                         }
@@ -189,6 +189,13 @@ require 'sess_cust.php';
             </div>
             <form action="../slave/pesanan_crud.php?proses=bukti_pembayaran" method="POST" enctype="multipart/form-data">
             <div class="modal-body">
+                      <h6>Nominal Transfer : <span id=nominal></span></h6>
+                      <code class="text-info">Lakukan Transfer Pembayaran sesuai dengan nominal yang telah ditambahkan kode diatas agar pemesanan dapat kami konfirmasi.</code>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
                       <input type="hidden" name="id_pemesanan">
                      <input type="file" name="gambar" id="">
             </div>
@@ -259,9 +266,20 @@ require 'sess_cust.php';
 	<!-- All Scripts & Plugins -->
 	<script src="switcher/js/dmss.js"></script>
    <script>
-   function sendid(id){
+   function sendid(id,harga){
       $("input[name=id_pemesanan]").val(id);
+      id = parseInt(id);
+      harga = parseInt(harga);
+      total = harga + id;
+      $("#nominal").text("Rp. "+rubah(total));
    }
+
+   function rubah(angka){
+   var reverse = angka.toString().split('').reverse().join(''),
+   ribuan = reverse.match(/\d{1,3}/g);
+   ribuan = ribuan.join('.').split('').reverse().join('');
+   return ribuan;
+ }
    </script>
    </body>
 

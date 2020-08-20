@@ -26,11 +26,10 @@ switch($proses){
             'status'         => 0,
             'jenis_hewan'         => $_POST['jenis_hewan'],
             'keterangan'         => $_POST['keterangan'],
-            'id_grommer'         => $_POST['id_grommer'],
+            'id_grommer'         => @$_POST['id_grommer'],
             'checkin'           => $_POST['checkin'],
             'checkout'           => $_POST['checkout']
         ];
-        print_r($data);die();
         $save = DB::insert('tbl_pemesanan',$data);
         if(!$save){
             header('location:../shop/order.php?error');
