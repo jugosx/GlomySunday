@@ -34,6 +34,8 @@
                   echo "Anda telah berhasil logout";
                 }else if($_GET['pesan'] == "belum_login"){
                   echo "Anda harus login untuk mengakses halaman admin";
+                }else if($_GET['aktifasi'] != "" && $_GET['pesan'] == 'token'){
+                  echo $_GET['aktifasi'];
                 }
               }
               ?>

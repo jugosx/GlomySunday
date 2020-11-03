@@ -148,11 +148,11 @@ session_start() ?>
                      <!-- plan features -->
                      <h6 class="plan-title">
                         <center>
-                           Tersedia : <?php
+                           Tersedia <?php
                                        if (strpos(strtolower($layanan['nama_layanan']), 'penitipan') !== false) {
-                                          echo $a = $tersedia['kandang'];
+                                          $a = $tersedia['kandang'];
                                        } else {
-                                          echo $a = $tersedia['grommer'];
+                                          $a = $tersedia['grommer'];
                                        }
                                        ?>
                         </center>

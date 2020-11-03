@@ -11,7 +11,10 @@ $password = $_POST['password'];
 
 //cek ambil data
 $data = DB::queryFirstRow("SELECT * FROM tbl_pelanggan WHERE email='$nama' and password='$password'");
-
+if($data['isAktif'] != 1){
+	header("location:login_cust.php?pesan=Aktifasi akun anda terlebih dahulu");
+	exit();
+}
 //jika data lebih dari 0 maka ada data
 if(count($data) > 0){
 	extract($data);

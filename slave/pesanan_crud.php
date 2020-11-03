@@ -96,4 +96,12 @@ switch($proses){
             }
         }
     break;
+    case 'laporan':
+        print_r($_POST);
+        if($_POST['layanan'] == ''){
+            if($_POST['awal'] == '' && $_POST['akhir']){
+                $where = ' AND ';
+            }
+        }
+    break;
 }

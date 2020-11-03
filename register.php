@@ -84,8 +84,9 @@
                   </div>
                   <div class="form-group d-flex justify-content-center">
                     <div class="form-check form-check-flat mt-0">
+                      <input type="checkbox" class="form-check-input" checked> 
                       <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" checked> I agree to the terms </label>
+                        I agree to the terms </label>
                     </div>
                   </div>
                   <div class="form-group">
