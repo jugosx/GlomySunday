@@ -235,7 +235,7 @@
                           <td> {$pesanan['nama']} </td>
                           <td> {$status} </td>
                           <td title=\"$pesanan[keterangan]\"> ".substr($pesanan['keterangan'],0,50)." ... </td>
-                          <td> <img src=\"$pesanan[bukti_pembayaran]\" class=\"img img-responsive\" alt=\"\"> </td>
+                          <td> <img src=\"".str_replace("../","",$pesanan['bukti_pembayaran'])."\" class=\"img img-responsive\" alt=\"\"> </td>
                           <td> ".number_format(harga($pesanan['id_pemesanan']))." </td>
                           <td> ".number_format($pesanan['denda'])." </td>
                           <td> {$pesanan['status_progress']} </td>

@@ -100,7 +100,6 @@
                         <td> $pel[notelp] </td>
                         <td> $pel[email] </td>
                         <td> 
-                          <button type=\"button\" class=\"btn btn-outline-primary\">Info</button>
                           <button type=\"button\" onclick=\"pelanggan_edit('$pel[id_pelanggan]')\" class=\"btn btn-outline-warning\">Edit</button>
                           <button type=\"button\" onclick=\"pelanggan_delete('$pel[id_pelanggan]')\" class=\"btn btn-outline-danger\">Hapus</button>
                           <button type=\"button\" onclick=\"pelanggan_reset('$pel[id_pelanggan]')\" class=\"btn btn-outline-danger\">Reset Password</button>
